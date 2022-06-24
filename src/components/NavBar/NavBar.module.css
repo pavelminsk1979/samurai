@@ -1,5 +1,12 @@
 .nav{
     grid-area: nav;
     background-color: darkseagreen;
+    opacity: 0.8;
+    font-size: 25px;
+
+}
+
+.item{
     color: white;
+    text-decoration: none;
 }

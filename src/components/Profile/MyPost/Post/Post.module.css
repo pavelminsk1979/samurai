@@ -1,0 +1,8 @@
+.post{
+    color:saddlebrown;
+}
+.post img{
+    height: 50px;
+    width: 55px;
+    border-radius: 25px;
+}
