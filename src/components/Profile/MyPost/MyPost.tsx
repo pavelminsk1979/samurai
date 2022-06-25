@@ -1,19 +1,28 @@
 import React from "react";
 import {Post} from "./Post/Post";
+import {CreatingTextForPost} from "./CreatingTextForPost/CreatingTextForPost";
+import {TextForPostType} from "../../../index";
 
-export function MyPost() {
+
+export type MyPostType={
+    message:Array<TextForPostType>
+}
+export function MyPost(props:MyPostType) {
+
     return (
         <div>
+           <CreatingTextForPost/>
             <div>
-                My post
-
-                <textarea></textarea>
-                <button>tiss</button>
-            </div>
-            <div>
-                <Post message={'mmmm...'}/>
-                <Post message={'What is it'}/>
-                <Post message={'I better come home'}/>
+                {
+                   props.message.map(el=>{
+                        return(
+                            <Post
+                                key={el.id}
+                                message={el.text}
+                            />
+                        )
+                    })
+                }
 
             </div>
         </div>

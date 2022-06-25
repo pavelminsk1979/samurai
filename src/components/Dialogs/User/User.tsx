@@ -1,5 +1,5 @@
 import {NavLink} from "react-router-dom";
-import st from "./Dialogs.module.css";
+import st from "./User.module.css";
 
 type UserType = {
     name: string

@@ -1,0 +1,10 @@
+.title{
+    font-size: 25px;
+    padding: 10px;
+    color: firebrick;
+}
+.button{
+    width: 50px;
+    height: 30px;
+    margin-left: 20px;
+}
