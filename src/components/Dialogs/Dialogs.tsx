@@ -1,7 +1,9 @@
 import st from './Dialogs.module.css'
 import {User} from "./User/User";
 import {MessageUser} from "./MessageUser/MessageUser";
-import {MessageUserType, UserType} from "../../index";
+import {MessageUserType, UserType} from '../../State';
+
+
 
 export type DialogsType = {
     messageUser:Array<MessageUserType>

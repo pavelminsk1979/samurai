@@ -1,7 +1,9 @@
 import React from "react";
 import {Post} from "./Post/Post";
 import {CreatingTextForPost} from "./CreatingTextForPost/CreatingTextForPost";
-import {TextForPostType} from "../../../index";
+import {TextForPostType} from "../../../State";
+
+
 
 
 export type MyPostType={
