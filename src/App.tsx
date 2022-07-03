@@ -13,10 +13,14 @@ import {StateType} from "./State";
 
 export type AppType={
     state:StateType
+    creatingMessage:()=>void
+    changeTextarea:(valueTaxtarea:string)=>void
+    valueTaxtarea:string
 }
 
 
 function App(props: AppType) {
+
     return (
         <BrowserRouter>
             <div className={st.app}>
@@ -32,7 +36,11 @@ function App(props: AppType) {
                     <Route
                         path={'/profile'}
                         render={() => <Profile
-                            message={props.state.message}/>}
+                            valueTaxtarea={props.valueTaxtarea}
+                            changeTextarea={props.changeTextarea}
+                            message={props.state.message}
+                            creatingMessage={props.creatingMessage}
+                        />}
                     />
                     <Route path={'/news'} component={News}/>
                     <Route path={'/music'} component={Music}/>
