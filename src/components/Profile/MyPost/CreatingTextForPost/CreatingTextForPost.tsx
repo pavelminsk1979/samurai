@@ -1,9 +1,9 @@
 import React, {ChangeEvent} from "react";
 import st from './CreatingTextForPost.module.css'
+import {ActionType} from "../../../../State";
 
 export type CreatingTextForPostType={
-    creatingMessage:()=>void
-    changeTextarea:(valueTaxtarea:string)=>void
+    dispatch:(action:ActionType)=>void
     valueTaxtarea:string
 }
 
@@ -11,11 +11,15 @@ export function CreatingTextForPost(props:CreatingTextForPostType) {
 
 
     const onChangeTextarea = (event:ChangeEvent<HTMLTextAreaElement>) => {
-props.changeTextarea(event.currentTarget.value)
+        const action ={type:'CHANGE-IN-TEXTERIA',valueTaxtarea:event.currentTarget.value}as const
+props.dispatch(action)
     }
 
     const creatingMessageHandler = () => {
-        props.creatingMessage()
+        const action = {type:'ADDED-POST'}as const
+        props.dispatch(action)
+        const action1 ={type:'CHANGE-IN-TEXTERIA',valueTaxtarea:''}as const
+        props.dispatch(action1)
        }
 
 

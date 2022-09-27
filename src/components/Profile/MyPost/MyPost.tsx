@@ -1,15 +1,14 @@
 import React from "react";
 import {Post} from "./Post/Post";
 import {CreatingTextForPost} from "./CreatingTextForPost/CreatingTextForPost";
-import { TextForPostType} from "../../../State";
+import {ActionType, TextForPostType} from "../../../State";
 
 
 
 
 export type MyPostType={
     message:Array<TextForPostType>
-    creatingMessage:()=>void
-    changeTextarea:(valueTaxtarea:string)=>void
+    dispatch:(action:ActionType)=>void
     valueTaxtarea:string
 }
 export function MyPost(props:MyPostType) {
@@ -18,8 +17,8 @@ export function MyPost(props:MyPostType) {
         <div>
            <CreatingTextForPost
                valueTaxtarea={props.valueTaxtarea}
-               changeTextarea={props.changeTextarea}
-               creatingMessage={props.creatingMessage}
+               dispatch={props.dispatch}
+
            />
             <div>
                 <div>

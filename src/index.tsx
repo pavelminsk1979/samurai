@@ -12,9 +12,9 @@ export const renderingState = (state:StateType) => {
     ReactDOM.render(
         <App
             valueTaxtarea={state.stateTextarea}
-            changeTextarea={store.changeTextarea.bind(store)}
+            dispatch={store.dispatch.bind(store)}
             state={state}
-            creatingMessage={store.creatingMessage.bind(store)}
+
         />,
         document.getElementById('root')
     );

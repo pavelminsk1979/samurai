@@ -20,13 +20,22 @@ export type StateType = {
     stateTextarea: string
 }
 
+type AddedPostActionType={
+    type:'ADDED-POST'
+}
+
+type ChangeTexteriaActionType={
+    type:'CHANGE-IN-TEXTERIA'
+    valueTaxtarea:string
+}
+export type ActionType=AddedPostActionType|ChangeTexteriaActionType
+
 export type StoreType = {
     _state: StateType
-    changeTextarea: (valueTaxtarea: string) => void
-    creatingMessage: () => void
-    renderingState:(state:StateType) => void
-        subscribe:(observe: (state:StateType) => void) => void
-    getState:()=>StateType
+    renderingState: (state: StateType) => void
+    subscribe: (observe: (state: StateType) => void) => void
+    getState: () => StateType
+    dispatch:(action:ActionType)=>void
 }
 
 export const store: StoreType = {
@@ -57,18 +66,18 @@ export const store: StoreType = {
         return this._state;
     },
 
-    renderingState(state:StateType) {
+    renderingState(state: StateType) {
         console.log('State change')
     },
-    changeTextarea(valueTaxtarea: string) {
-        this._state.stateTextarea = valueTaxtarea
-        this.renderingState(this.getState());
-    },
-    creatingMessage() {
-        this._state.message.push({id: 6, text: this._state.stateTextarea})
-        this.changeTextarea('')
-        this.renderingState(this._state)
 
+    dispatch(action:ActionType) {
+        if (action.type === 'ADDED-POST') {
+            this._state.message.push({id: 6, text: this._state.stateTextarea})
+            this.renderingState(this._state)
+        } else if (action.type=== 'CHANGE-IN-TEXTERIA'){
+            this._state.stateTextarea =action.valueTaxtarea
+            this.renderingState(this.getState());
+        }
     },
     subscribe(observe) {
         this.renderingState = observe

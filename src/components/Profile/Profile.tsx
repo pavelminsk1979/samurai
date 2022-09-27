@@ -1,14 +1,13 @@
 import React from "react";
 import {MyPost} from "./MyPost/MyPost";
 import {HeaderProfile} from "./HeaderProfile/HeaderProfile";
-import { TextForPostType} from "../../State";
+import {ActionType, TextForPostType} from "../../State";
 
 
 
 export type ProfileType = {
     message:Array<TextForPostType>
-    creatingMessage:()=>void
-    changeTextarea:(valueTaxtarea:string)=>void
+    dispatch:(action:ActionType)=>void
     valueTaxtarea:string
 }
 
@@ -19,9 +18,8 @@ export function Profile(props:ProfileType) {
             <HeaderProfile/>
             <MyPost
                 valueTaxtarea={props.valueTaxtarea}
-                changeTextarea={props.changeTextarea}
+                dispatch={props.dispatch}
                 message={props.message}
-                creatingMessage={props.creatingMessage}
             />
 
         </div>

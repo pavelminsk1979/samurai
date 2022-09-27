@@ -8,13 +8,12 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {StateType} from "./State";
+import {ActionType, StateType} from "./State";
 
 
 export type AppType={
     state:StateType
-    creatingMessage:()=>void
-    changeTextarea:(valueTaxtarea:string)=>void
+    dispatch:(action:ActionType)=>void
     valueTaxtarea:string
 }
 
@@ -37,9 +36,8 @@ function App(props: AppType) {
                         path={'/profile'}
                         render={() => <Profile
                             valueTaxtarea={props.valueTaxtarea}
-                            changeTextarea={props.changeTextarea}
+                            dispatch={props.dispatch}
                             message={props.state.message}
-                            creatingMessage={props.creatingMessage}
                         />}
                     />
                     <Route path={'/news'} component={News}/>
