@@ -15,6 +15,7 @@ export type AppType={
     state:StateType
     dispatch:(action:ActionType)=>void
     valueTaxtarea:string
+    newMessageUserTextTexterea:string
 }
 
 
@@ -29,6 +30,8 @@ function App(props: AppType) {
                     <Route
                         path={'/dialogs'}
                         render={()=> <Dialogs
+                            newMessageUserTextTexterea={props.newMessageUserTextTexterea}
+                            dispatch={props.dispatch}
                             messageUser={props.state.messageUser}
                             user={props.state.user}/>}
                     />

@@ -18,17 +18,12 @@ export type StateType = {
     messageUser: Array<MessageUserType>
     user: Array<UserType>
     stateTextarea: string
+    newMessageUserText:string
 }
 
-type AddedPostActionType={
-    type:'ADDED-POST'
-}
 
-type ChangeTexteriaActionType={
-    type:'CHANGE-IN-TEXTERIA'
-    valueTaxtarea:string
-}
-export type ActionType=AddedPostActionType|ChangeTexteriaActionType
+export type ActionType=AddedPostActionType|ChangeTexteriaActionType|NewMessageUserTextActionType|AddedMessageUserTextType
+
 
 export type StoreType = {
     _state: StateType
@@ -36,6 +31,46 @@ export type StoreType = {
     subscribe: (observe: (state: StateType) => void) => void
     getState: () => StateType
     dispatch:(action:ActionType)=>void
+}
+
+type AddedPostActionType={
+    type:'ADDED-POST'
+}
+export const addedPostAC = () =>{
+    return {
+        type:'ADDED-POST'
+    }as const
+}
+
+type ChangeTexteriaActionType={
+    type:'CHANGE-IN-TEXTERIA'
+    valueTaxtarea:string
+}
+export const changeTextareaAC = (valueTaxtarea:string) =>{
+    return {
+        type:'CHANGE-IN-TEXTERIA',
+        valueTaxtarea
+    }as const
+}
+
+type NewMessageUserTextActionType={
+    type:'NEW-MESSAGE-USER-TEXT',
+    newMessageUserTextTexterea:string
+}
+export const newMessageUserTextAC = (newMessageUserTextTexterea:string) =>{
+    return {
+        type:'NEW-MESSAGE-USER-TEXT',
+        newMessageUserTextTexterea
+    }as const
+}
+
+type AddedMessageUserTextType={
+    type:'ADDED-MESSAGE-USER-TEXT',
+}
+export const addedMessageUserTextAC = () =>{
+    return {
+        type:'ADDED-MESSAGE-USER-TEXT',
+    }as const
 }
 
 export const store: StoreType = {
@@ -60,6 +95,7 @@ export const store: StoreType = {
             {id: 4, message: 'Mercedes?'},
             {id: 5, message: 'Ou-Ou! I also want money'}
         ],
+        newMessageUserText:'',
         stateTextarea: ''
     },
     getState() {
@@ -77,6 +113,12 @@ export const store: StoreType = {
         } else if (action.type=== 'CHANGE-IN-TEXTERIA'){
             this._state.stateTextarea =action.valueTaxtarea
             this.renderingState(this.getState());
+        } else if(action.type==='NEW-MESSAGE-USER-TEXT'){
+           this._state.newMessageUserText=action.newMessageUserTextTexterea;
+            this.renderingState(this._state)
+        }else if (action.type==='ADDED-MESSAGE-USER-TEXT'){
+            this._state.messageUser.push({id:6,message:this._state.newMessageUserText})
+            this.renderingState(this._state)
         }
     },
     subscribe(observe) {
