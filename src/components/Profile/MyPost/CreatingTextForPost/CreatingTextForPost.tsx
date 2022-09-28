@@ -1,6 +1,7 @@
 import React, {ChangeEvent} from "react";
 import st from './CreatingTextForPost.module.css'
-import {ActionType, addedPostAC, changeTextareaAC} from "../../../../State";
+import {ActionType} from "../../../../State";
+import {addedPostAC, changeTextareaAC} from "../../../../redux/reduser/profileReduser";
 
 export type CreatingTextForPostType={
     dispatch:(action:ActionType)=>void

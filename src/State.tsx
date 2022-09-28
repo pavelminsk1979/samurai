@@ -1,3 +1,6 @@
+import {AddedPostActionType, ChangeTexteriaActionType, profileReduser} from "./redux/reduser/profileReduser";
+import {AddedMessageUserTextType, dialogsReduser, NewMessageUserTextActionType} from "./redux/reduser/dialogsReduser";
+
 export type TextForPostType = {
     id: number
     text: string
@@ -33,45 +36,7 @@ export type StoreType = {
     dispatch:(action:ActionType)=>void
 }
 
-type AddedPostActionType={
-    type:'ADDED-POST'
-}
-export const addedPostAC = () =>{
-    return {
-        type:'ADDED-POST'
-    }as const
-}
 
-type ChangeTexteriaActionType={
-    type:'CHANGE-IN-TEXTERIA'
-    valueTaxtarea:string
-}
-export const changeTextareaAC = (valueTaxtarea:string) =>{
-    return {
-        type:'CHANGE-IN-TEXTERIA',
-        valueTaxtarea
-    }as const
-}
-
-type NewMessageUserTextActionType={
-    type:'NEW-MESSAGE-USER-TEXT',
-    newMessageUserTextTexterea:string
-}
-export const newMessageUserTextAC = (newMessageUserTextTexterea:string) =>{
-    return {
-        type:'NEW-MESSAGE-USER-TEXT',
-        newMessageUserTextTexterea
-    }as const
-}
-
-type AddedMessageUserTextType={
-    type:'ADDED-MESSAGE-USER-TEXT',
-}
-export const addedMessageUserTextAC = () =>{
-    return {
-        type:'ADDED-MESSAGE-USER-TEXT',
-    }as const
-}
 
 export const store: StoreType = {
     _state: {
@@ -107,19 +72,9 @@ export const store: StoreType = {
     },
 
     dispatch(action:ActionType) {
-        if (action.type === 'ADDED-POST') {
-            this._state.message.push({id: 6, text: this._state.stateTextarea})
-            this.renderingState(this._state)
-        } else if (action.type=== 'CHANGE-IN-TEXTERIA'){
-            this._state.stateTextarea =action.valueTaxtarea
-            this.renderingState(this.getState());
-        } else if(action.type==='NEW-MESSAGE-USER-TEXT'){
-           this._state.newMessageUserText=action.newMessageUserTextTexterea;
-            this.renderingState(this._state)
-        }else if (action.type==='ADDED-MESSAGE-USER-TEXT'){
-            this._state.messageUser.push({id:6,message:this._state.newMessageUserText})
-            this.renderingState(this._state)
-        }
+        profileReduser(this._state,action)
+        dialogsReduser(this._state,action)
+        this.renderingState(this._state)
     },
     subscribe(observe) {
         this.renderingState = observe

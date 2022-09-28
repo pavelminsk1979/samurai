@@ -1,8 +1,9 @@
 import st from './Dialogs.module.css'
 import {User} from "./User/User";
 import {MessageUser} from "./MessageUser/MessageUser";
-import {ActionType, addedMessageUserTextAC, MessageUserType, newMessageUserTextAC, UserType} from '../../State';
+import {ActionType,  MessageUserType,  UserType} from '../../State';
 import React, {ChangeEvent} from "react";
+import {addedMessageUserTextAC,newMessageUserTextAC} from "../../redux/reduser/dialogsReduser";
 
 
 
