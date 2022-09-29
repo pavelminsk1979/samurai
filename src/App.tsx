@@ -8,14 +8,14 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {ActionType, StateType} from "./State";
+import {StateReduxStorType} from "./redux/reduser/reduxStor";
 
 
 export type AppType={
-    state:StateType
-    dispatch:(action:ActionType)=>void
-    valueTaxtarea:string
-    newMessageUserTextTexterea:string
+    state:StateReduxStorType
+    dispatch:(action:any)=>void
+    newPost:string
+    newDialogUser:string
 }
 
 
@@ -30,17 +30,17 @@ function App(props: AppType) {
                     <Route
                         path={'/dialogs'}
                         render={()=> <Dialogs
-                            newMessageUserTextTexterea={props.newMessageUserTextTexterea}
+                            newDialogUser={props.newDialogUser}
                             dispatch={props.dispatch}
-                            messageUser={props.state.messageUser}
-                            user={props.state.user}/>}
+                            dialogsUser={props.state.dialogsMessageUser.dialogsUser}
+                            /*user={props.state.user}*//>}
                     />
                     <Route
                         path={'/profile'}
                         render={() => <Profile
-                            valueTaxtarea={props.valueTaxtarea}
+                            newPost={props.newPost}
                             dispatch={props.dispatch}
-                            message={props.state.message}
+                            posts={props.state.profilePost.posts}
                         />}
                     />
                     <Route path={'/news'} component={News}/>

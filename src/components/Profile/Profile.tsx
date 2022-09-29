@@ -1,14 +1,14 @@
 import React from "react";
 import {MyPost} from "./MyPost/MyPost";
 import {HeaderProfile} from "./HeaderProfile/HeaderProfile";
-import {ActionType, TextForPostType} from "../../State";
+import {ProfilePostType} from "../../redux/reduser/profileReduser";
 
 
 
 export type ProfileType = {
-    message:Array<TextForPostType>
-    dispatch:(action:ActionType)=>void
-    valueTaxtarea:string
+    posts:Array<ProfilePostType>
+    dispatch:(action:any)=>void
+    newPost:string
 }
 
 export function Profile(props:ProfileType) {
@@ -17,9 +17,9 @@ export function Profile(props:ProfileType) {
         <div>
             <HeaderProfile/>
             <MyPost
-                valueTaxtarea={props.valueTaxtarea}
+                newPost={props.newPost}
                 dispatch={props.dispatch}
-                message={props.message}
+                posts={props.posts}
             />
 
         </div>

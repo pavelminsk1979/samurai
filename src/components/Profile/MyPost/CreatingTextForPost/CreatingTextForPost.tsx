@@ -1,26 +1,27 @@
 import React, {ChangeEvent} from "react";
 import st from './CreatingTextForPost.module.css'
-import {ActionType} from "../../../../State";
-import {addedPostAC, changeTextareaAC} from "../../../../redux/reduser/profileReduser";
+
+import {addedPostAC, creatingPostTextareaAC} from "../../../../redux/reduser/profileReduser";
 
 export type CreatingTextForPostType={
-    dispatch:(action:ActionType)=>void
-    valueTaxtarea:string
+    dispatch:(action:any)=>void
+    newPost:string
 }
 
 
 export function CreatingTextForPost(props:CreatingTextForPostType) {
 
 
+
     const onChangeTextarea = (event:ChangeEvent<HTMLTextAreaElement>) => {
         const text = event.currentTarget.value
-props.dispatch(changeTextareaAC(text))
+        props.dispatch(creatingPostTextareaAC(text))
     }
 
     const creatingMessageHandler = () => {
         props.dispatch(addedPostAC())
         const textEmpty = ''
-        props.dispatch(changeTextareaAC(textEmpty))
+        props.dispatch(creatingPostTextareaAC(textEmpty))
        }
 
 
@@ -31,7 +32,7 @@ props.dispatch(changeTextareaAC(text))
             </div>
             <div>
                 <textarea
-                    value={props.valueTaxtarea}
+                    value={props.newPost}
                     onChange={onChangeTextarea}/>
                 <div>
                     <button

@@ -2,7 +2,7 @@ import React from "react";
 import st from './Post.module.css'
 
 type PostType={
-    message:string
+    text:string
 }
 
 export function Post (props:PostType) {
@@ -14,7 +14,7 @@ export function Post (props:PostType) {
 
             <img
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTohy5X6YB_C1gNJ_RhB29PWx_apCsSigsQNA&usqp=CAU"/>
-            {props.message}
+            {props.text}
         </div>
     )
 }
