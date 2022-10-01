@@ -1,35 +1,39 @@
 import st from './Dialogs.module.css'
-import {User} from "./User/User";
 import {MessageUser} from "./MessageUser/MessageUser";
 import React, {ChangeEvent} from "react";
-import {addedDialogUserStatetAC, creatingDialogTextareaAC,
-    DialogUserType} from "../../redux/reduser/dialogsReduser";
+import {
+    addedMessageStatetAC,
+    creatingMessageinTextareaAC,
+    MessageType,
+    UserNameType
+} from "../../redux/reduser/dialogsReduser";
+import {User} from "./User/User";
 
 
 export type DialogsType = {
-    /* user:any*/
+    userName:Array<UserNameType>
     dispatch:(action:any)=>void
-    newDialogUser:string
-    dialogsUser:Array<DialogUserType>
+    newMessageForState:string
+    messageState:Array<MessageType>
 }
 
 export function Dialogs(props: DialogsType) {
 
-    const addedDialogUserState = () => {
-        props.dispatch(addedDialogUserStatetAC())
+    const addedMessageStatet = () => {
+        props.dispatch(addedMessageStatetAC())
         const textEmpty = ''
-        props.dispatch(creatingDialogTextareaAC(textEmpty))
+        props.dispatch(creatingMessageinTextareaAC(textEmpty))
     }
 
-    const creatingDialogTextarea = (event:ChangeEvent<HTMLTextAreaElement>) => {
+    const creatingMessageInTextarea = (event:ChangeEvent<HTMLTextAreaElement>) => {
         const text = event.currentTarget.value
-      props.dispatch(creatingDialogTextareaAC(text))
+      props.dispatch(creatingMessageinTextareaAC(text))
     }
     
     return (
         <div className={st.dialogList}>
-      {/*      <div className={st.allPerson}>
-                {props.user.map(el => {
+            <div className={st.allPerson}>
+                {props.userName.map(el => {
                         return (
                             <User
                                 key={el.idName}
@@ -39,17 +43,17 @@ export function Dialogs(props: DialogsType) {
                     }
                 )
                 }
-            </div>*/}
+            </div>
 
             <div className={st.messagesAll}>
                 <div>
                     <div><textarea
-                        onChange={creatingDialogTextarea}
-                        value={props.newDialogUser}></textarea></div>
-                    <div><button onClick={addedDialogUserState}>added</button></div>
+                        onChange={creatingMessageInTextarea}
+                        value={props.newMessageForState}></textarea></div>
+                    <div><button onClick={addedMessageStatet}>added</button></div>
                 </div>
 
-                {props.dialogsUser.map(el => {
+                {props.messageState.map(el => {
                         return (
                             <MessageUser
                                 key={el.id}

@@ -1,51 +1,61 @@
 
-export type DialogUserType = {
+export type MessageType = {
     id: number
     message: string
 }
-type StateDialogsUserType={
-    dialogsUser:Array<DialogUserType>
-    newDialogUser:string
+export type UserNameType = {
+    idName: number
+    name: string
 }
-const initialStateDialogsUser:StateDialogsUserType={
-    dialogsUser: [
+type StateMessageStateType={
+    messageState:Array<MessageType>
+    newMessageForState:string
+    userName:Array<UserNameType>
+}
+const initialMessageState:StateMessageStateType={
+    userName: [
+        {idName: 1, name: 'Pavel'},
+        {idName: 2, name: 'Olga'},
+        {idName: 3, name: 'Inokenti'},
+        {idName: 4, name: 'Sonia'},
+        {idName: 5, name: 'Kuzma'}
+    ],
+    messageState: [
         {id: 1, message: 'Help me with money'},
         {id: 2, message: 'Ooooh...'},
         {id: 3, message: 'I want to buy a car'},
         {id: 4, message: 'Mercedes?'},
         {id: 5, message: 'Ou-Ou! I also want money'}
     ],
-    newDialogUser:''
+    newMessageForState:''
 }
 
-export const dialogsReduser= (state:StateDialogsUserType=initialStateDialogsUser,action:ActionType)=>{
+export const dialogsReduser= (state:StateMessageStateType=initialMessageState,action:ActionType)=>{
     switch (action.type) {
-        case 'ADDED-DIALOG-USER-STATE': {
-            return {...state,dialogsUser:[{id:6,message:state.newDialogUser},...state.dialogsUser]}
+        case 'ADDED-MESSAGE-USER-STATE': {
+            return {...state,messageState:[{id:6,message:state.newMessageForState},...state.messageState]}
         }
-        case 'CREATING-DIALOG-IN-TEXTAREA': {
-
-            state.newDialogUser=action.textTexterea;
-            return state
+        case 'CREATING-MESSAGE-IN-TEXTAREA': {
+            return{...state,newMessageForState:action.textTexterea}
         }
 
         default:return state
     }
 }
 
-type ActionType=ReturnType<typeof addedDialogUserStatetAC>|ReturnType<typeof creatingDialogTextareaAC>
+type ActionType=ReturnType<typeof addedMessageStatetAC>|ReturnType<typeof creatingMessageinTextareaAC>
 
 
-export const addedDialogUserStatetAC = () =>{
+export const addedMessageStatetAC = () =>{
     return {
-        type:'ADDED-DIALOG-USER-STATE',
+        type:'ADDED-MESSAGE-USER-STATE',
     }as const
 }
 
 
-export const creatingDialogTextareaAC = (textTexterea:string) =>{
+export const creatingMessageinTextareaAC = (textTexterea:string) =>{
     return {
-        type:'CREATING-DIALOG-IN-TEXTAREA',
+        type:'CREATING-MESSAGE-IN-TEXTAREA',
         textTexterea
     }as const
 }

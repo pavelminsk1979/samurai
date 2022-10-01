@@ -4,7 +4,7 @@ import {Header} from "./components/Header/Header";
 import {NavBar} from "./components/NavBar/NavBar";
 import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
-import {BrowserRouter, Route} from "react-router-dom";
+import { Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
@@ -15,14 +15,14 @@ export type AppType={
     state:StateReduxStorType
     dispatch:(action:any)=>void
     newPost:string
-    newDialogUser:string
+    newMessageForState:string
 }
 
 
 function App(props: AppType) {
 
     return (
-        <BrowserRouter>
+
             <div className={st.app}>
                 <Header/>
                 <NavBar/>
@@ -30,10 +30,10 @@ function App(props: AppType) {
                     <Route
                         path={'/dialogs'}
                         render={()=> <Dialogs
-                            newDialogUser={props.newDialogUser}
+                            newMessageForState={props.newMessageForState}
                             dispatch={props.dispatch}
-                            dialogsUser={props.state.dialogsMessageUser.dialogsUser}
-                            /*user={props.state.user}*//>}
+                            messageState={props.state.dialogsMessageUser.messageState}
+                            userName={props.state.dialogsMessageUser.userName}/>}
                     />
                     <Route
                         path={'/profile'}
@@ -48,7 +48,7 @@ function App(props: AppType) {
                     <Route path={'/settings'} component={Settings}/>
                 </div>
             </div>
-        </BrowserRouter>
+
     );
 }
 
