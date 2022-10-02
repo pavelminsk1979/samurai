@@ -10,6 +10,11 @@ export function NavBar() {
             <div >
                 <NavLink
                     className={st.item}
+                    to='/participants'>Participants</NavLink>
+            </div>
+            <div >
+                <NavLink
+                    className={st.item}
                     to='/profile'>Profile</NavLink>
             </div>
             <div>

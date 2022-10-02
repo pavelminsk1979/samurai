@@ -18,7 +18,8 @@ const initialMessageState:StateMessageStateType={
         {idName: 2, name: 'Olga'},
         {idName: 3, name: 'Inokenti'},
         {idName: 4, name: 'Sonia'},
-        {idName: 5, name: 'Kuzma'}
+        {idName: 5, name: 'Kuzma'},
+        {idName: 6, name: 'Svinka Pepi'}
     ],
     messageState: [
         {id: 1, message: 'Help me with money'},
