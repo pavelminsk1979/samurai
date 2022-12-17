@@ -1,33 +1,21 @@
 import st from './Dialogs.module.css'
 import {MessageUser} from "./MessageUser/MessageUser";
 import React, {ChangeEvent} from "react";
-import {
-    addedMessageStatetAC,
-    creatingMessageinTextareaAC,
-    MessageType,
-    UserNameType
-} from "../../redux/reduser/dialogsReduser";
 import {User} from "./User/User";
+import { DialogsType } from './DialogsContainer';
 
 
-export type DialogsType = {
-    userName:Array<UserNameType>
-    dispatch:(action:any)=>void
-    newMessageForState:string
-    messageState:Array<MessageType>
-}
 
 export function Dialogs(props: DialogsType) {
 
     const addedMessageStatet = () => {
-        props.dispatch(addedMessageStatetAC())
-        const textEmpty = ''
-        props.dispatch(creatingMessageinTextareaAC(textEmpty))
+        props.addedMessageStatet()
+        props.creatingMessageinTextarea('')
     }
 
     const creatingMessageInTextarea = (event:ChangeEvent<HTMLTextAreaElement>) => {
-        const text = event.currentTarget.value
-      props.dispatch(creatingMessageinTextareaAC(text))
+        const textTexterea = event.currentTarget.value
+      props.creatingMessageinTextarea(textTexterea)
     }
     
     return (

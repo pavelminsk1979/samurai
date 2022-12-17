@@ -1,18 +1,21 @@
 import React from 'react';
-import {ParticipanType} from "../../redux/reduser/participantsReduser";
+
 import {ParticipantsPropsType} from "./ParticipantsContainer";
 
-// type ParticipantsComponentType = {
-//     participants: Array<ParticipanType>
-//     useful: () => void
-//     setParticipant: () => void
-//
-// }
+
+
 export const Participants = (props: ParticipantsPropsType) => {
+    const onClickHandler = (idPartisipant:number) => {
+        props.useful(idPartisipant)
+    }
     return (
         <div>
             {
                 props.participants.map(el => {
+                    let nameButton
+                 if(el.useful===true){
+                     nameButton='friend'
+                 } else {nameButton='peron'}
                     return (
                         <div key={el.id}>
                           <span>
@@ -23,10 +26,15 @@ export const Participants = (props: ParticipantsPropsType) => {
 
                               </div>
                           </span>
-                            <span>
-                              <div>{el.name}</div>
-                              <div>{el.status}</div>
-                          </span>
+                            <div>
+                                <button
+                                    onClick={()=>onClickHandler(
+                                        el.id)}>{nameButton}</button>
+                              <span>{el.name}</span>
+                                <span>. - </span>
+                              <span>{el.status}</span>
+
+                          </div>
                         </div>
                     )
                 })

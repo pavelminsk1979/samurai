@@ -4,8 +4,8 @@ import {dialogsReduser} from "./dialogsReduser";
 import {participantsReduser} from "./participantsReduser";
 
 const commonReduser=combineReducers({
-    profilePost:profileReduser,
-    dialogsMessageUser:dialogsReduser,
+    profileState:profileReduser,
+    dialogsState:dialogsReduser,
     participantsState:participantsReduser
 })
 

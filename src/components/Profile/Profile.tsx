@@ -1,26 +1,16 @@
 import React from "react";
-import {MyPost} from "./MyPost/MyPost";
 import {HeaderProfile} from "./HeaderProfile/HeaderProfile";
-import {ProfilePostType} from "../../redux/reduser/profileReduser";
+import MyPostContainer from "./MyPost/MyPostContainer";
 
 
 
-export type ProfileType = {
-    posts:Array<ProfilePostType>
-    dispatch:(action:any)=>void
-    newPost:string
-}
 
-export function Profile(props:ProfileType) {
+export function Profile() {
 
     return (
         <div>
             <HeaderProfile/>
-            <MyPost
-                newPost={props.newPost}
-                dispatch={props.dispatch}
-                posts={props.posts}
-            />
+            <MyPostContainer/>
 
         </div>
     )

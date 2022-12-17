@@ -3,7 +3,7 @@
 export type ParticipanType={
     id:number,
     name:string,
-    useful:boolean,
+    useful:boolean, /* полезная для меня анкета или нет*/
     status: string
 }
 
@@ -13,9 +13,9 @@ export type StateType={
 
 const initialParticipantsState:StateType={
     participants:[
-        {id:1, name:'Masha',useful:true, status:"I'm samurai"},
+        {id:1, name:'Masha',useful:false, status:"I'm samurai"},
         {id:2, name:'Bond',useful:true, status:"I'm samurai 007"},
-        {id:3, name:'President',useful:false, status:"Я устал, я ухожу..."},
+        {id:3, name:'President',useful:true, status:"Я устал, я ухожу..."},
         {id:4, name:'белочка',useful:false, status:'...прихожу'},
     ]
 }
@@ -26,7 +26,8 @@ export const participantsReduser= (state=initialParticipantsState,action:ActionT
         case 'USEFUL-PARTICIPANT': {
             return {...state,participants:state.participants.map(
                 el=>el.id===action.idPartisipant
-                    ?{...el,useful:!el.useful}:el)}
+                    ?{...el,useful:!el.useful}
+                    :el)}
         }
         case 'SET-PARTICIPANTS': {
             return {...state,participants:[...state.participants,...action.participants]}

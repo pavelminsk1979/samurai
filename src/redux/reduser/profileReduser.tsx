@@ -21,28 +21,29 @@ export const profileReduser= (state:StateProfilePostsType=initialStateProfilePos
 
     switch (action.type) {
         case 'ADDED-POST-STATE': {
-            return {...state,posts:[{id: 4, text: state.newPost},...state.posts]}
+            return {...state,posts:[{
+                id: 4, text: state.newPost},...state.posts]}
         }
         case 'CREATING-POST-IN-TEXTAREA': {
 
-            return {...state,newPost: action.valueTaxtarea};
+            return {...state,newPost: action.symbolTaxtarea};
         }
         default:return state
     }
 }
 
- type ActionType=ReturnType<typeof addedPostAC>|ReturnType<typeof creatingPostTextareaAC>
+ type ActionType=ReturnType<typeof addedPostInStateAC>|ReturnType<typeof createTextInTextareaAC>
 
-export const addedPostAC = () =>{
+export const addedPostInStateAC = () =>{
     return {
         type:'ADDED-POST-STATE'
     }as const
 }
 
 
-export const creatingPostTextareaAC = (valueTaxtarea:string) =>{
+export const createTextInTextareaAC = (symbolTaxtarea:string) =>{
     return {
         type:'CREATING-POST-IN-TEXTAREA',
-        valueTaxtarea
+        symbolTaxtarea
     }as const
 }

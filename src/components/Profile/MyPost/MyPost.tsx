@@ -1,31 +1,26 @@
 import React from "react";
 import {Post} from "./Post/Post";
 import {CreatingTextForPost} from "./CreatingTextForPost/CreatingTextForPost";
-import {ProfilePostType} from "../../../redux/reduser/profileReduser";
+import {MyPostType} from "./MyPostContainer";
 
 
 
-
-
-export type MyPostType={
-    posts:Array<ProfilePostType>
-    dispatch:(action:any)=>void
-    newPost:string
-}
-export function MyPost(props:MyPostType) {
+export const MyPost=(props: MyPostType)=> {
 
     return (
         <div>
-           <CreatingTextForPost
-               newPost={props.newPost}
-               dispatch={props.dispatch}
+            <CreatingTextForPost
+                newPost={props.newPost}
+                createTextInTextarea={props.createTextInTextarea}
+                addedPostInState={props.addedPostInState}
 
-           />
+
+            />
             <div>
                 <div>
                     {
-                        props.posts.map(el=>{
-                            return(
+                        props.posts.map(el => {
+                            return (
                                 <Post
                                     key={el.id}
                                     text={el.text}
