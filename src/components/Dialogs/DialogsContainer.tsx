@@ -4,10 +4,11 @@ import {
 } from "../../redux/reduser/dialogsReduser";
 import {connect} from "react-redux";
 import {Dialogs} from "./Dialogs";
+import {StateReduxStorType} from "../../redux/reduser/reduxStor";
 
 
 
-const mapStateToProps= (state:any) => {
+const mapStateToProps= (state:StateReduxStorType) => {
     return{
         userName:state.dialogsState.userName,
         newMessageForState:state.dialogsState.newMessageForState,

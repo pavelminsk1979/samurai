@@ -1,10 +1,11 @@
 import {MyPost} from "./MyPost";
 import {addedPostInStateAC, createTextInTextareaAC, ProfilePostType} from "../../../redux/reduser/profileReduser";
 import {connect} from "react-redux";
+import {StateReduxStorType} from "../../../redux/reduser/reduxStor";
 
 
 
-const mapStateToProps= (state:any) => {
+const mapStateToProps= (state:StateReduxStorType) => {
     return{
         posts:state.profileState.posts,
         newPost:state.profileState.newPost
@@ -12,7 +13,7 @@ const mapStateToProps= (state:any) => {
 }
 const mapDispatchToProps = (dispatch:any) => {
     return{
-        createTextInTextarea:(symbol:any)=>{
+        createTextInTextarea:(symbol:string)=>{
             dispatch(createTextInTextareaAC(symbol))
         },
         addedPostInState:()=>{

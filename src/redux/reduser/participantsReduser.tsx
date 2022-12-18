@@ -5,6 +5,7 @@ export type ParticipanType={
     name:string,
     useful:boolean, /* полезная для меня анкета или нет*/
     status: string
+    photos:any
 }
 
 export type StateType={
@@ -13,10 +14,10 @@ export type StateType={
 
 const initialParticipantsState:StateType={
     participants:[
-        {id:1, name:'Masha',useful:false, status:"I'm samurai"},
-        {id:2, name:'Bond',useful:true, status:"I'm samurai 007"},
-        {id:3, name:'President',useful:true, status:"Я устал, я ухожу..."},
-        {id:4, name:'белочка',useful:false, status:'...прихожу'},
+        {id:1, name:'Masha',useful:false, status:"I'm samurai",photos:''},
+        {id:2, name:'Bond',useful:true, status:"I'm samurai 007",photos:''},
+        {id:3, name:'President',useful:true, status:"Я устал, я ухожу...",photos:''},
+        {id:4, name:'белочка',useful:false, status:'...прихожу',photos:''},
     ]
 }
 

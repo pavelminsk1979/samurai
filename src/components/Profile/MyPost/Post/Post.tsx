@@ -1,6 +1,7 @@
 import React from "react";
 import st from './Post.module.css'
 
+
 type PostType={
     text:string
 }
