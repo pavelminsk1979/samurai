@@ -5,27 +5,24 @@ import userFoto from '../../assets/images/blackMan.jpg'
 import st from './Participant.module.css'
 
 
+class Participants extends React.Component<ParticipantsPropsType> {
 
-class Participants extends React.Component<ParticipantsPropsType>{
-    
-    constructor(props:any) {
-        super(props);
+    componentDidMount() {
         axios.get <any, any>('https://social-network.samuraijs.com/api/1.0/users')
             .then((response) => {
                 this.props.setParticipant(response.data.items)
             })
     }
 
-
-     onClickHandler = (idPartisipant: number) => {
-         this.props.useful(idPartisipant)
+    onClickHandler = (idPartisipant: number) => {
+        this.props.useful(idPartisipant)
     }
 
     render() {
         return (
             <div>
                 {
-                   this.props.participants.map(el => {
+                    this.props.participants.map(el => {
                         let nameButton
                         if (el.useful === true) {
                             nameButton = 'friend'
@@ -35,7 +32,7 @@ class Participants extends React.Component<ParticipantsPropsType>{
                         return (
                             <div key={el.id}>
                           <span>
-                              <div >
+                              <div>
                            <img src={el.photos.small !== null
                                ? el.photos.small
                                : userFoto}
@@ -64,4 +61,4 @@ class Participants extends React.Component<ParticipantsPropsType>{
     }
 }
 
-    export default Participants
+export default Participants
