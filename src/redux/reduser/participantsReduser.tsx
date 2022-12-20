@@ -5,23 +5,22 @@ export type ParticipanType={
     name:string,
     useful:boolean, /* полезная для меня анкета или нет*/
     status: string
-    photos:any
+    photos: {
+        small: string,
+        large: string
+    }
 }
 
-export type StateType={
+export type initialParticipantsStateType={
     participants:Array<ParticipanType>
 }
 
-const initialParticipantsState:StateType={
-    participants:[
-        {id:1, name:'Masha',useful:false, status:"I'm samurai",photos:''},
-        {id:2, name:'Bond',useful:true, status:"I'm samurai 007",photos:''},
-        {id:3, name:'President',useful:true, status:"Я устал, я ухожу...",photos:''},
-        {id:4, name:'белочка',useful:false, status:'...прихожу',photos:''},
-    ]
+const initialParticipantsState:initialParticipantsStateType={
+    participants:[]
+
 }
 
-export const participantsReduser= (state=initialParticipantsState,action:ActionType):StateType=> {
+export const participantsReduser= (state:initialParticipantsStateType=initialParticipantsState,action:ActionType):initialParticipantsStateType=> {
 
     switch (action.type) {
         case 'USEFUL-PARTICIPANT': {

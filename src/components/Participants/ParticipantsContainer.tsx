@@ -1,15 +1,16 @@
 import React from 'react';
-import {Participants} from "./Participants";
+import Participants from "./Participants";
 import {connect} from "react-redux";
 import {StateReduxStorType} from "../../redux/reduser/reduxStor";
 import {ParticipanType, setParticipantsAC, usefulParticipantAC} from "../../redux/reduser/participantsReduser";
+import {Dispatch} from "redux";
 
-const mapStateToPropse = (state: StateReduxStorType) => {
+const mapStateToPropse = (state: StateReduxStorType):MapStatePropsType => {
     return {
         participants: state.participantsState.participants
     }
 }
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: Dispatch):MapDispatchPropsType => {
     return {
         useful: (idPartisipant: number) => (
             dispatch(usefulParticipantAC(idPartisipant))

@@ -3,21 +3,23 @@ export type ProfilePostType = {
     id: number
     text: string
 }
-type StateProfilePostsType={
+/*type StateProfilePostsType={
     posts:Array<ProfilePostType>
     newPost:string
-}
-const initialStateProfilePost:StateProfilePostsType={
+}*/
+const initialStateProfilePost={
     posts: [
         {id: 1, text: 'mmmm...'},
         {id: 2, text: 'What is it'},
         {id: 3, text: 'I  come home better'}
 
-    ],
+    ] as Array<ProfilePostType>,
     newPost:'',
 }
 
-export const profileReduser= (state:StateProfilePostsType=initialStateProfilePost,action:ActionType)=> {
+export type initialStateProfilePostType = typeof initialStateProfilePost
+
+export const profileReduser= (state:initialStateProfilePostType=initialStateProfilePost,action:ActionType):initialStateProfilePostType=> {
 
     switch (action.type) {
         case 'ADDED-POST-STATE': {

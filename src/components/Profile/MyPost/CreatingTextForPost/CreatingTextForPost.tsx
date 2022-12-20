@@ -9,7 +9,6 @@ export type CreatingTextForPostType = {
 
 export function CreatingTextForPost(props: CreatingTextForPostType) {
 
-
     const createTextInTextarea = (event: ChangeEvent<HTMLTextAreaElement>) => {
         const symbol = event.currentTarget.value
         props.createTextInTextarea(symbol)

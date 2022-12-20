@@ -7,12 +7,8 @@ export type UserNameType = {
     idName: number
     name: string
 }
-type StateMessageStateType={
-    messageState:Array<MessageType>
-    newMessageForState:string
-    userName:Array<UserNameType>
-}
-const initialMessageState:StateMessageStateType={
+
+const initialMessageState={
     userName: [
         {idName: 1, name: 'Pavel'},
         {idName: 2, name: 'Olga'},
@@ -20,18 +16,20 @@ const initialMessageState:StateMessageStateType={
         {idName: 4, name: 'Sonia'},
         {idName: 5, name: 'Kuzma'},
         {idName: 6, name: 'Svinka Pepi'}
-    ],
+    ] as Array<UserNameType>,
     messageState: [
         {id: 1, message: 'Help me with money'},
         {id: 2, message: 'Ooooh...'},
         {id: 3, message: 'I want to buy a car'},
         {id: 4, message: 'Mercedes?'},
         {id: 5, message: 'Ou-Ou! I also want money'}
-    ],
+    ] as Array<MessageType>,
     newMessageForState:''
 }
 
-export const dialogsReduser= (state:StateMessageStateType=initialMessageState,action:ActionType)=>{
+export type initialMessageStateType=typeof initialMessageState
+
+export const dialogsReduser= (state:initialMessageStateType=initialMessageState,action:ActionType):initialMessageStateType=>{
     switch (action.type) {
         case 'ADDED-MESSAGE-USER-STATE': {
             return {...state,messageState:[{id:6,message:state.newMessageForState},...state.messageState]}

@@ -5,17 +5,18 @@ import {
 import {connect} from "react-redux";
 import {Dialogs} from "./Dialogs";
 import {StateReduxStorType} from "../../redux/reduser/reduxStor";
+import {Dispatch} from "redux";
 
 
 
-const mapStateToProps= (state:StateReduxStorType) => {
+const mapStateToProps= (state:StateReduxStorType):MapStatePropsType => {
     return{
         userName:state.dialogsState.userName,
         newMessageForState:state.dialogsState.newMessageForState,
     messageState:state.dialogsState.messageState,
     }
 }
-const mapDispatchToProps = (dispatch:any) => {
+const mapDispatchToProps = (dispatch:Dispatch):MapDispatchPropsType => {
     return{
         addedMessageStatet:()=>{
             dispatch(addedMessageStatetAC())
