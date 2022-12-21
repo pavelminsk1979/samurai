@@ -2,12 +2,20 @@ import React from 'react';
 import Participants from "./Participants";
 import {connect} from "react-redux";
 import {StateReduxStorType} from "../../redux/reduser/reduxStor";
-import {ParticipanType, setParticipantsAC, usefulParticipantAC} from "../../redux/reduser/participantsReduser";
+import {
+    ParticipanType,
+    setActivePageAC,
+    setParticipantsAC, setTotalCountAC,
+    usefulParticipantAC
+} from "../../redux/reduser/participantsReduser";
 import {Dispatch} from "redux";
 
 const mapStateToPropse = (state: StateReduxStorType):MapStatePropsType => {
     return {
-        participants: state.participantsState.participants
+        participants: state.participantsState.participants,
+        count:state.participantsState.count,
+        totalCount:state.participantsState.totalCount,
+        activePage:state.participantsState.activePage
     }
 }
 const mapDispatchToProps = (dispatch: Dispatch):MapDispatchPropsType => {
@@ -17,16 +25,28 @@ const mapDispatchToProps = (dispatch: Dispatch):MapDispatchPropsType => {
         ),
         setParticipant: (participants: Array<ParticipanType>) => (
             dispatch(setParticipantsAC(participants))
-        )
+        ),
+        setActivePage:(activePagesNumber:number)=>{
+            dispatch(setActivePageAC(activePagesNumber))
+        },
+        setTotalCount:(totalCount:number)=>{
+            dispatch(setTotalCountAC(totalCount))
+        }
     }
 }
 
 type MapStatePropsType = {
     participants: Array<ParticipanType>
+    count:number
+    totalCount:number
+    activePage:number
 }
 type MapDispatchPropsType = {
     useful: (idPartisipant: number) => void
     setParticipant: (participants: Array<ParticipanType>) => void
+    setActivePage:(activePagesNumber:number)=>void
+    setTotalCount:(totalCount:number)=>void
+
 }
 
 export type ParticipantsPropsType = MapStatePropsType & MapDispatchPropsType

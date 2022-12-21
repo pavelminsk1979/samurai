@@ -8,7 +8,16 @@ import st from './Participant.module.css'
 class Participants extends React.Component<ParticipantsPropsType> {
 
     componentDidMount() {
-        axios.get <any, any>('https://social-network.samuraijs.com/api/1.0/users')
+        axios.get <any, any>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.activePage}&count=${this.props.count}`)
+            .then((response) => {
+                this.props.setParticipant(response.data.items)
+                this.props.setTotalCount(response.data.totalCount)
+            })
+    }
+
+    setActivePageHandler(activePagesNumber:number){
+        this.props.setActivePage(activePagesNumber)
+        axios.get <any, any>(`https://social-network.samuraijs.com/api/1.0/users?page=${activePagesNumber}&count=${this.props.count}`)
             .then((response) => {
                 this.props.setParticipant(response.data.items)
             })
@@ -19,8 +28,29 @@ class Participants extends React.Component<ParticipantsPropsType> {
     }
 
     render() {
+        let pageCountNumber = Math.ceil(this.props.totalCount / this.props.count)
+        /* количество страниц с сервера ожидаю*/
+        let pageCount = []
+        for (let i = 1; i <= pageCountNumber; i++) {
+            pageCount.push(i)
+        }
         return (
             <div>
+                {
+                    pageCount.map(e => {
+                        return (
+                            <span >
+                                <button
+                                    onClick={()=>{
+                                        this.setActivePageHandler(e) }}
+                                    className={
+                                    this.props.activePage===e ?st.paginationButton:''}
+                                >{e}</button>
+                            </span>
+                        )
+                    })
+                }
+
                 {
                     this.props.participants.map(el => {
                         let nameButton

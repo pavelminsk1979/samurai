@@ -11,13 +11,18 @@ export type ParticipanType={
     }
 }
 
-export type initialParticipantsStateType={
-    participants:Array<ParticipanType>
+const initialParticipantsState:initialParticipantsStateType={
+    participants:[],
+    count:100,
+    totalCount:0,
+    activePage:1
 }
 
-const initialParticipantsState:initialParticipantsStateType={
-    participants:[]
-
+export type initialParticipantsStateType={
+    participants:Array<ParticipanType>
+    count:number,
+    totalCount:number
+    activePage:number
 }
 
 export const participantsReduser= (state:initialParticipantsStateType=initialParticipantsState,action:ActionType):initialParticipantsStateType=> {
@@ -30,14 +35,20 @@ export const participantsReduser= (state:initialParticipantsStateType=initialPar
                     :el)}
         }
         case 'SET-PARTICIPANTS': {
-            return {...state,participants:[...state.participants,...action.participants]}
+            return {...state,participants:action.participants}
+        }
+        case "SET-ACTIVE-PAGE":{
+            return {...state,activePage:action.activePagesNumber}
+        }
+        case "SET-TOTALCOUNT":{
+            return {...state,totalCount:action.count}
         }
 
         default:return state
     }
 }
 
-type ActionType=ReturnType<typeof usefulParticipantAC>|ReturnType<typeof setParticipantsAC>
+type ActionType=ReturnType<typeof usefulParticipantAC>|ReturnType<typeof setParticipantsAC>|ReturnType<typeof setActivePageAC>|ReturnType<typeof setTotalCountAC>
 
 export const usefulParticipantAC = (idPartisipant:number) =>{
     return {
@@ -53,3 +64,18 @@ export const setParticipantsAC = (participants:Array<ParticipanType>) =>{
         participants
     }as const
 }
+
+export const setActivePageAC = (activePagesNumber:number) =>{
+    return {
+        type:'SET-ACTIVE-PAGE',
+      activePagesNumber
+    }as const
+}
+
+export const setTotalCountAC = (totalCount:number) =>{
+    return {
+        type:'SET-TOTALCOUNT',
+        count:totalCount
+    }as const
+}
+
