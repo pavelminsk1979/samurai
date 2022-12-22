@@ -1,5 +1,4 @@
 import React from 'react';
-import Participants from "./Participants";
 import {connect} from "react-redux";
 import {StateReduxStorType} from "../../redux/reduser/reduxStor";
 import {
@@ -9,6 +8,7 @@ import {
     usefulParticipantAC
 } from "../../redux/reduser/participantsReduser";
 import {Dispatch} from "redux";
+import ParticipantsAxiosQueryComponents from "./ParticipantsAxiosQueryComponents";
 
 const mapStateToPropse = (state: StateReduxStorType):MapStatePropsType => {
     return {
@@ -51,4 +51,4 @@ type MapDispatchPropsType = {
 
 export type ParticipantsPropsType = MapStatePropsType & MapDispatchPropsType
 
-export default connect(mapStateToPropse, mapDispatchToProps)(Participants)
+export default connect(mapStateToPropse, mapDispatchToProps)(ParticipantsAxiosQueryComponents)

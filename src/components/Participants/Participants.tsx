@@ -1,66 +1,58 @@
 import React from 'react';
-import {ParticipantsPropsType} from "./ParticipantsContainer";
-import axios from "axios";
 import userFoto from '../../assets/images/blackMan.jpg'
 import st from './Participant.module.css'
+import {ParticipanType} from "../../redux/reduser/participantsReduser";
 
+type ParticipantsType = {
+    totalCount: number
+    count: number
+    useful: (idPartisipant: number) => void
+    activePage: number
+    participants: Array<ParticipanType>
+    setActivePageHandler: (activePagesNumber: number) => void
+}
 
-class Participants extends React.Component<ParticipantsPropsType> {
+export const Participants = (props: ParticipantsType) => {
 
-    componentDidMount() {
-        axios.get <any, any>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.activePage}&count=${this.props.count}`)
-            .then((response) => {
-                this.props.setParticipant(response.data.items)
-                this.props.setTotalCount(response.data.totalCount)
-            })
+    let pageCountNumber = Math.ceil(props.totalCount / props.count)
+    /* количество страниц с сервера ожидаю*/
+    let pageCount = []
+    for (let i = 1; i <= pageCountNumber; i++) {
+        pageCount.push(i)
     }
 
-    setActivePageHandler(activePagesNumber:number){
-        this.props.setActivePage(activePagesNumber)
-        axios.get <any, any>(`https://social-network.samuraijs.com/api/1.0/users?page=${activePagesNumber}&count=${this.props.count}`)
-            .then((response) => {
-                this.props.setParticipant(response.data.items)
-            })
+    const onClickHandler = (idPartisipant: number) => {
+        props.useful(idPartisipant)
     }
 
-    onClickHandler = (idPartisipant: number) => {
-        this.props.useful(idPartisipant)
-    }
-
-    render() {
-        let pageCountNumber = Math.ceil(this.props.totalCount / this.props.count)
-        /* количество страниц с сервера ожидаю*/
-        let pageCount = []
-        for (let i = 1; i <= pageCountNumber; i++) {
-            pageCount.push(i)
-        }
-        return (
-            <div>
-                {
-                    pageCount.map(e => {
-                        return (
-                            <span >
+    return (
+        <div>
+            {
+                pageCount.map(e => {
+                    return (
+                        <span>
                                 <button
-                                    onClick={()=>{
-                                        this.setActivePageHandler(e) }}
+                                    onClick={() => {
+                                        props.setActivePageHandler(e)
+                                    }}
                                     className={
-                                    this.props.activePage===e ?st.paginationButton:''}
+                                        props.activePage === e ? st.paginationButton : ''}
                                 >{e}</button>
                             </span>
-                        )
-                    })
-                }
+                    )
+                })
+            }
 
-                {
-                    this.props.participants.map(el => {
-                        let nameButton
-                        if (el.useful === true) {
-                            nameButton = 'friend'
-                        } else {
-                            nameButton = 'peron'
-                        }
-                        return (
-                            <div key={el.id}>
+            {
+                props.participants.map(el => {
+                    let nameButton
+                    if (el.useful === true) {
+                        nameButton = 'friend'
+                    } else {
+                        nameButton = 'person'
+                    }
+                    return (
+                        <div key={el.id}>
                           <span>
                               <div>
                            <img src={el.photos.small !== null
@@ -71,24 +63,20 @@ class Participants extends React.Component<ParticipantsPropsType> {
                               </div>
 
                                   <button
-                                      onClick={() => this.onClickHandler(
+                                      onClick={() => onClickHandler(
                                           el.id)}>{nameButton}</button>
-
                           </span>
-                                <span>
+                            <span>
 
                                 <span>{el.name}</span>
                                 <span>. - </span>
                                 <span>{el.status}</span>
 
                             </span>
-                            </div>
-                        )
-                    })
-                }
-            </div>
-        )
-    }
+                        </div>
+                    )
+                })
+            }
+        </div>
+    )
 }
-
-export default Participants
