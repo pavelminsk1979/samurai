@@ -2,6 +2,8 @@ import React from 'react';
 import userFoto from '../../assets/images/blackMan.jpg'
 import st from './Participant.module.css'
 import {ParticipanType} from "../../redux/reduser/participantsReduser";
+import commonStule from '../../common/stule/loading.module.css'
+
 
 type ParticipantsType = {
     totalCount: number
@@ -27,6 +29,7 @@ export const Participants = (props: ParticipantsType) => {
 
     return (
         <div>
+
             {
                 pageCount.map(e => {
                     return (
