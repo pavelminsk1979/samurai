@@ -9,7 +9,7 @@ import {Dispatch} from "redux";
 const mapStateToProps= (state:StateReduxStorType):MapStatePropsType => {
     return{
         posts:state.profileState.posts,
-        newPost:state.profileState.newPost
+        newPost:state.profileState.newPost,
     }
 }
 const mapDispatchToProps = (dispatch:Dispatch):MapDispatchPropsType => {

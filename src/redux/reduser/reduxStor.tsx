@@ -12,3 +12,6 @@ const commonReduser=combineReducers({
 export const store=createStore(commonReduser)
 
 export type StateReduxStorType=ReturnType<typeof commonReduser>
+
+// @ts-ignore
+window.store = store

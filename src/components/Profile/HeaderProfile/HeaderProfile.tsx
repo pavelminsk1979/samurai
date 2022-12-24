@@ -1,7 +1,15 @@
 import React from "react";
 import st from './HeaderProfile.module.css'
+import {Loading} from "../../../common/components/Loading";
 
-export function HeaderProfile () {
+type HeaderProfileType = {
+    profileUser:any
+}
+
+export function HeaderProfile (props:HeaderProfileType) {
+    if(!props.profileUser){
+        return <Loading/>
+    }
     return(
         <div>
             <div className={st.illustration}>
@@ -10,6 +18,7 @@ export function HeaderProfile () {
             </div>
 
             <div>
+                <img src={props.profileUser.photos.large}/>
                 ava+description
             </div>
         </div>

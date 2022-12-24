@@ -55,16 +55,16 @@ export const participantsReduser = (state: initialParticipantsStateType = initia
 }
 
 
-type changeIsLoadingACType = ReturnType<typeof changeIsLoadingAC>
-export const changeIsLoadingAC = (loading:boolean) => {
+type changeIsLoadingACType = ReturnType<typeof changeIsLoading>
+export const changeIsLoading = (loading:boolean) => {
     return {
         type: 'CHANGE-ISLOADING',
         loading
     } as const
 }
 
-type usefulParticipantACType = ReturnType<typeof usefulParticipantAC>
-export const usefulParticipantAC = (idPartisipant: number) => {
+type usefulParticipantACType = ReturnType<typeof usefulParticipant>
+export const usefulParticipant = (idPartisipant: number) => {
     return {
         type: 'USEFUL-PARTICIPANT',
         idPartisipant,
@@ -72,24 +72,24 @@ export const usefulParticipantAC = (idPartisipant: number) => {
     } as const
 }
 
-type setParticipantsACType = ReturnType<typeof setParticipantsAC>
-export const setParticipantsAC = (participants: Array<ParticipanType>) => {
+type setParticipantsACType = ReturnType<typeof setParticipants>
+export const setParticipants = (participants: Array<ParticipanType>) => {
     return {
         type: 'SET-PARTICIPANTS',
         participants
     } as const
 }
 
-type setActivePageACType = ReturnType<typeof setActivePageAC>
-export const setActivePageAC = (activePagesNumber: number) => {
+type setActivePageACType = ReturnType<typeof setActivePage>
+export const setActivePage = (activePagesNumber: number) => {
     return {
         type: 'SET-ACTIVE-PAGE',
         activePagesNumber
     } as const
 }
 
-type setTotalCountACType = ReturnType<typeof setTotalCountAC>
-export const setTotalCountAC = (totalCount: number) => {
+type setTotalCountACType = ReturnType<typeof setTotalCount>
+export const setTotalCount = (totalCount: number) => {
     return {
         type: 'SET-TOTALCOUNT',
         count: totalCount

@@ -2,13 +2,13 @@ import React from 'react';
 import st from './App.module.css'
 import {Header} from "./components/Header/Header";
 import {NavBar} from "./components/NavBar/NavBar";
-import {Profile} from "./components/Profile/Profile";
 import {Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import ParticipantsContainer from "./components/Participants/ParticipantsContainer";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import ProfileContainer from "./components/Profile/ProfileContainer";
 
 
 const App = () => {
@@ -22,7 +22,7 @@ const App = () => {
                     render={() => <DialogsContainer/>}/>
                 <Route
                     path='/profile'
-                    render={() => <Profile/>}/>
+                    render={() => <ProfileContainer/>}/>
                 <Route path='/news' component={News}/>
                 <Route path='/music' component={Music}/>
                 <Route path='/settings' component={Settings}/>

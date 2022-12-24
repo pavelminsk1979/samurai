@@ -2,13 +2,14 @@ import React from 'react';
 import userFoto from '../../assets/images/blackMan.jpg'
 import st from './Participant.module.css'
 import {ParticipanType} from "../../redux/reduser/participantsReduser";
-import commonStule from '../../common/stule/loading.module.css'
+import { NavLink } from 'react-router-dom';
+
 
 
 type ParticipantsType = {
     totalCount: number
     count: number
-    useful: (idPartisipant: number) => void
+    usefulParticipant: (idPartisipant: number) => void
     activePage: number
     participants: Array<ParticipanType>
     setActivePageHandler: (activePagesNumber: number) => void
@@ -24,7 +25,7 @@ export const Participants = (props: ParticipantsType) => {
     }
 
     const onClickHandler = (idPartisipant: number) => {
-        props.useful(idPartisipant)
+        props.usefulParticipant(idPartisipant)
     }
 
     return (
@@ -58,11 +59,13 @@ export const Participants = (props: ParticipantsType) => {
                         <div key={el.id}>
                           <span>
                               <div>
+                                  <NavLink to={'/profile/' + el.id}>
                            <img src={el.photos.small !== null
                                ? el.photos.small
                                : userFoto}
                                 className={st.photo}
                            />
+                                      </NavLink>
                               </div>
 
                                   <button

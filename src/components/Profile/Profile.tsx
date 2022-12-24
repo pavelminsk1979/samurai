@@ -3,15 +3,16 @@ import {HeaderProfile} from "./HeaderProfile/HeaderProfile";
 import MyPostContainer from "./MyPost/MyPostContainer";
 
 
+type ProfileType = {
+    profileUser:any
+}
 
-
-export function Profile() {
+export function Profile(props:ProfileType) {
 
     return (
         <div>
-            <HeaderProfile/>
-            <MyPostContainer/>
-
+            <HeaderProfile profileUser={props.profileUser}/>
+            <MyPostContainer />
         </div>
     )
 }
