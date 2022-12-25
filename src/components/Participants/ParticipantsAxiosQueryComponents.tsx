@@ -3,6 +3,7 @@ import {ParticipantsPropsType} from "./ParticipantsContainer";
 import axios from "axios";
 import {Participants} from './Participants';
 import {Loading} from "../../common/components/Loading";
+import {GetUsersType} from "../../common/Types/getUsersType";
 
 
 
@@ -10,7 +11,7 @@ class ParticipantsAxiosQueryComponents extends React.Component<ParticipantsProps
 
     componentDidMount() {
         this.props.changeIsLoading(true)
-        axios.get <any, any>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.activePage}&count=${this.props.count}`)
+        axios.get <any,any >(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.activePage}&count=${this.props.count}`)
             .then((response) => {
                 this.props.changeIsLoading(false)
                 this.props.setParticipants(response.data.items)

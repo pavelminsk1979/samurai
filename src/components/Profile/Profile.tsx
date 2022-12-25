@@ -1,17 +1,18 @@
 import React from "react";
-import {HeaderProfile} from "./HeaderProfile/HeaderProfile";
+import {ProfileInfo} from "./Profile/ProfileInfo";
 import MyPostContainer from "./MyPost/MyPostContainer";
+import {GetProfileType} from "../../common/Types/getProfileType";
 
 
 type ProfileType = {
-    profileUser:any
+    profileUser:GetProfileType
 }
 
 export function Profile(props:ProfileType) {
 
     return (
         <div>
-            <HeaderProfile profileUser={props.profileUser}/>
+            <ProfileInfo profileUser={props.profileUser}/>
             <MyPostContainer />
         </div>
     )
