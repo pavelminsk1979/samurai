@@ -3,7 +3,6 @@ import {ParticipantsPropsType} from "./ParticipantsContainer";
 import axios from "axios";
 import {Participants} from './Participants';
 import {Loading} from "../../common/components/Loading";
-import {GetUsersType} from "../../common/Types/getUsersType";
 
 
 
