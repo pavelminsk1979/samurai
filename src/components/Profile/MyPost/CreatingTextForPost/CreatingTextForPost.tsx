@@ -1,11 +1,11 @@
 import React, {ChangeEvent} from "react";
 import st from './CreatingTextForPost.module.css'
+
 export type CreatingTextForPostType = {
-    createTextInTextarea: (symbol: any) => void
+    createTextInTextarea: (symbol: string) => void
     addedPostInState: () => void
     newPost: string
 }
-
 
 export function CreatingTextForPost(props: CreatingTextForPostType) {
 
@@ -18,7 +18,6 @@ export function CreatingTextForPost(props: CreatingTextForPostType) {
         props.addedPostInState()
         props.createTextInTextarea('')
     }
-
 
     return (
         <div>

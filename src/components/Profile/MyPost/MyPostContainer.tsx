@@ -1,12 +1,12 @@
 import {MyPost} from "./MyPost";
 import {addedPostInStateAC, createTextInTextareaAC, ProfilePostType} from "../../../redux/reduser/profileReduser";
 import {connect} from "react-redux";
-import {StateReduxStorType} from "../../../redux/reduser/reduxStor";
+import {StateType} from "../../../redux/reduser/reduxStor";
 import {Dispatch} from "redux";
 
 
 
-const mapStateToProps= (state:StateReduxStorType):MapStatePropsType => {
+const mapStateToProps= (state:StateType):MapStatePropsType => {
     return{
         posts:state.profileState.posts,
         newPost:state.profileState.newPost,

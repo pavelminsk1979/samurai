@@ -1,7 +1,7 @@
 export type ParticipanType = {
     id: number,
     name: string,
-    useful: boolean, /* полезная для меня анкета или нет*/
+    followed: boolean, /* полезная для меня анкета или нет*/
     status: string
     photos: {
         small: string,
@@ -28,11 +28,19 @@ export type initialParticipantsStateType = {
 export const participantsReduser = (state: initialParticipantsStateType = initialParticipantsState, action: ActionType): initialParticipantsStateType => {
 
     switch (action.type) {
-        case 'USEFUL-PARTICIPANT': {
+        case 'FOLLOW-PARTICIPANT': {
             return {
                 ...state, participants: state.participants.map(
                     el => el.id === action.idPartisipant
-                        ? {...el, useful: !el.useful}
+                        ? {...el, followed: true}
+                        : el)
+            }
+        }
+        case 'UNFOLLOW-PARTICIPANT': {
+            return {
+                ...state, participants: state.participants.map(
+                    el => el.id === action.idPartisipant
+                        ? {...el, followed: false}
                         : el)
             }
         }
@@ -45,8 +53,8 @@ export const participantsReduser = (state: initialParticipantsStateType = initia
         case "SET-TOTALCOUNT": {
             return {...state, totalCount: action.count}
         }
-        case "CHANGE-ISLOADING":{
-            return {...state, isLoading:action.loading}
+        case "CHANGE-ISLOADING": {
+            return {...state, isLoading: action.loading}
         }
 
         default:
@@ -54,23 +62,33 @@ export const participantsReduser = (state: initialParticipantsStateType = initia
     }
 }
 
+type unFollowParticipantType = ReturnType<typeof unFollowParticipant>
+export const unFollowParticipant = (idPartisipant: number) => {
+    return {
+        type: 'UNFOLLOW-PARTICIPANT',
+        idPartisipant,
+
+    } as const
+}
+
+type followParticipantType = ReturnType<typeof followParticipant>
+export const followParticipant = (idPartisipant: number) => {
+    return {
+        type: 'FOLLOW-PARTICIPANT',
+        idPartisipant,
+
+    } as const
+}
+
 
 type changeIsLoadingACType = ReturnType<typeof changeIsLoading>
-export const changeIsLoading = (loading:boolean) => {
+export const changeIsLoading = (loading: boolean) => {
     return {
         type: 'CHANGE-ISLOADING',
         loading
     } as const
 }
 
-type usefulParticipantACType = ReturnType<typeof usefulParticipant>
-export const usefulParticipant = (idPartisipant: number) => {
-    return {
-        type: 'USEFUL-PARTICIPANT',
-        idPartisipant,
-
-    } as const
-}
 
 type setParticipantsACType = ReturnType<typeof setParticipants>
 export const setParticipants = (participants: Array<ParticipanType>) => {
@@ -99,5 +117,6 @@ export const setTotalCount = (totalCount: number) => {
 type ActionType = setTotalCountACType
     | setActivePageACType
     | setParticipantsACType
-    | usefulParticipantACType
+    | followParticipantType
     | changeIsLoadingACType
+    | unFollowParticipantType

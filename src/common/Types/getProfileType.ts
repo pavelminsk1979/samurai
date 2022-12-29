@@ -1,19 +1,19 @@
 export type GetProfileType = {
     aboutMe: string
-    contacts:ContactsType
+    contacts: ContactsType
     fullName: string
     lookingForAJob: boolean
-    lookingForAJobDescription:string
-    photos:PhotosType
+    lookingForAJobDescription: string
+    photos: PhotosType
     userId: number
 }
-type PhotosType = {
-    small: null|string
-    large: null|string
+export type PhotosType = {
+    small: string
+    large: string
 }
 
 
-type ContactsType  = {
+export type ContactsType = {
     facebook: string
     website: string
     vk: string
@@ -21,5 +21,5 @@ type ContactsType  = {
     instagram: string
     youtube: string
     github: string
-    mainLink:string
+    mainLink: string
 }

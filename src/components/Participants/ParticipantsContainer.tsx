@@ -1,17 +1,15 @@
-import React from 'react';
 import {connect} from "react-redux";
-import {StateReduxStorType} from "../../redux/reduser/reduxStor";
+import {StateType} from "../../redux/reduser/reduxStor";
 import {
-    changeIsLoading,
+    changeIsLoading, followParticipant,
     ParticipanType,
     setActivePage,
-    setParticipants, setTotalCount,
-    usefulParticipant
+    setParticipants, setTotalCount, unFollowParticipant
 } from "../../redux/reduser/participantsReduser";
 import ParticipantsAxiosQueryComponents from "./ParticipantsAxiosQueryComponents";
 
 
-const mapStateToPropse = (state: StateReduxStorType):MapStatePropsType => {
+const mapStateToPropse = (state: StateType): MapStatePropsType => {
     return {
         participants: state.participantsState.participants,
         count: state.participantsState.count,
@@ -23,20 +21,28 @@ const mapStateToPropse = (state: StateReduxStorType):MapStatePropsType => {
 
 type MapStatePropsType = {
     participants: Array<ParticipanType>
-    count:number
-    totalCount:number
-    activePage:number
-    isLoading:boolean
+    count: number
+    totalCount: number
+    activePage: number
+    isLoading: boolean
 }
 type MapDispatchPropsType = {
-    usefulParticipant: (idPartisipant: number) => void
+    followParticipant: (idPartisipant: number) => void
+    unFollowParticipant: (idPartisipant: number) => void
     setParticipants: (participants: Array<ParticipanType>) => void
-    setActivePage:(activePagesNumber:number)=>void
-    setTotalCount:(totalCount:number)=>void
-    changeIsLoading:(loading:boolean)=>void
+    setActivePage: (activePagesNumber: number) => void
+    setTotalCount: (totalCount: number) => void
+    changeIsLoading: (loading: boolean) => void
 
 }
 
 export type ParticipantsPropsType = MapStatePropsType & MapDispatchPropsType
 
-export default connect(mapStateToPropse, {usefulParticipant,setParticipants,setActivePage,setTotalCount,changeIsLoading})(ParticipantsAxiosQueryComponents)
+export default connect(mapStateToPropse, {
+    unFollowParticipant,
+    followParticipant,
+    setParticipants,
+    setActivePage,
+    setTotalCount,
+    changeIsLoading
+})(ParticipantsAxiosQueryComponents)

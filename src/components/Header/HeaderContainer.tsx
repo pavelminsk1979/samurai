@@ -3,18 +3,19 @@ import {Header} from "./Header";
 import axios from "axios";
 import {connect} from "react-redux";
 import {setDataLoginWithServer} from "../../redux/reduser/authReduser";
+import {getLoginAuthMeType, LoginAuthMeType} from "../../common/Types/getLoginAuthMeType";
+import {StateType} from "../../redux/reduser/reduxStor";
 
 
-
-class HeaderComponent extends React.Component<any> {
+class HeaderComponent extends React.Component<HeaderType> {
 
     componentDidMount() {
-        axios.get <any, any>(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
+        axios.get <getLoginAuthMeType>(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
             withCredentials: true
         })
             .then((response) => {
                 if (response.data.resultCode === 0) {
-    this.props.setDataLoginWithServer(response.data.data)
+                    this.props.setDataLoginWithServer(response.data.data)
                 }
             })
     }
@@ -32,7 +33,7 @@ class HeaderComponent extends React.Component<any> {
 }
 
 
-const mapStateToPropse = (state: any) => {
+const mapStateToPropse = (state: StateType): mapStateToPropseType => {
     return {
         isLogin: state.auth.isLogin,
         id: state.auth.id,
@@ -42,13 +43,13 @@ const mapStateToPropse = (state: any) => {
 }
 
 export type mapStateToPropseType = {
-    isLogin: any
-    id: any
-    login: any
-    email: any
+    isLogin: boolean
+    id: null | number
+    login: null | string
+    email: null | string
 }
-type MapDispatchToPropsType ={
-    setDataLoginWithServer:(dataLoginWithServer:any)=>void
+type MapDispatchToPropsType = {
+    setDataLoginWithServer: (dataLoginWithServer: LoginAuthMeType) => void
 }
 export type HeaderType = mapStateToPropseType & MapDispatchToPropsType
 

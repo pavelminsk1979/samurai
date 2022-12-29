@@ -2,14 +2,15 @@ import React from 'react';
 import userFoto from '../../assets/images/blackMan.jpg'
 import st from './Participant.module.css'
 import {ParticipanType} from "../../redux/reduser/participantsReduser";
-import { NavLink } from 'react-router-dom';
-
+import {NavLink} from 'react-router-dom';
+import axios from "axios";
 
 
 type ParticipantsType = {
     totalCount: number
     count: number
-    usefulParticipant: (idPartisipant: number) => void
+    followParticipant: (id: number) => void
+    unFollowParticipant: (id: number) => void
     activePage: number
     participants: Array<ParticipanType>
     setActivePageHandler: (activePagesNumber: number) => void
@@ -22,10 +23,6 @@ export const Participants = (props: ParticipantsType) => {
     let pageCount = []
     for (let i = 1; i <= pageCountNumber; i++) {
         pageCount.push(i)
-    }
-
-    const onClickHandler = (idPartisipant: number) => {
-        props.usefulParticipant(idPartisipant)
     }
 
     return (
@@ -49,12 +46,6 @@ export const Participants = (props: ParticipantsType) => {
 
             {
                 props.participants.map(el => {
-                    let nameButton
-                    if (el.useful === true) {
-                        nameButton = 'friend'
-                    } else {
-                        nameButton = 'person'
-                    }
                     return (
                         <div key={el.id}>
                           <span>
@@ -64,13 +55,43 @@ export const Participants = (props: ParticipantsType) => {
                                ? el.photos.small
                                : userFoto}
                                 className={st.photo}
+                                alt={'user photo'}
                            />
                                       </NavLink>
                               </div>
+                              {
+                                  el.followed
+                                      ? <button onClick={() => {
+                                          let userId = el.id
+                                          axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, {
+                                              withCredentials: true, headers: {
+                                                  'API-KEY': 'b48cd3f5-7cda-4a22-b331-9292412429bd'
+                                              }
+                                          })
+                                              .then(response => {
+                                                  if (response.data.resultCode === 0) {
+                                                      props.unFollowParticipant(el.id)
+                                                  }
+                                              })
+                                      }
+                                      }>FRIEND</button>
 
-                                  <button
-                                      onClick={() => onClickHandler(
-                                          el.id)}>{nameButton}</button>
+                                      : <button onClick={() => {
+                                          let userId = el.id
+                                          axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, {}, {
+                                              withCredentials: true, headers: {
+                                                  'API-KEY': 'b48cd3f5-7cda-4a22-b331-9292412429bd'
+                                              }
+                                          })
+                                              .then(response => {
+                                                  if (response.data.resultCode === 0) {
+                                                      props.followParticipant(el.id)
+                                                  }
+                                              })
+                                      }
+                                      }>PERSON</button>
+                              }
+
                           </span>
                             <span>
 

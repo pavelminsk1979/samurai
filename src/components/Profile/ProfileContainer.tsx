@@ -2,18 +2,24 @@ import React from "react";
 import {Profile} from "./Profile";
 import axios from "axios";
 import {connect} from "react-redux";
-import {StateReduxStorType} from "../../redux/reduser/reduxStor";
-import { setProfileUsers } from "../../redux/reduser/profileReduser";
+import {StateType} from "../../redux/reduser/reduxStor";
+import {setProfileUsers} from "../../redux/reduser/profileReduser";
 import {withRouter} from "react-router-dom";
+import {GetProfileType} from "../../common/Types/getProfileType";
 
 
-
-class ProfileContainer extends React.Component<any, any> {
-
+class ProfileContainer extends React.Component<any> {
+    /*-----------------------------------------------ProfilePropsType*/
     componentDidMount() {
         let userId = this.props.match.params.userId
-        if(!userId){userId=2}
-        axios.get <any, any>(`https://social-network.samuraijs.com/api/1.0/profile/`+userId)
+        if (!userId) {
+            userId = 2
+        }
+        axios.get<GetProfileType>(`https://social-network.samuraijs.com/api/1.0/profile/` + userId, {
+            withCredentials: true, headers: {
+                'API-KEY': 'b48cd3f5-7cda-4a22-b331-9292412429bd'
+            }
+        })
             .then((response) => {
                 this.props.setProfileUsers(response.data)
             })
@@ -21,27 +27,30 @@ class ProfileContainer extends React.Component<any, any> {
 
     render() {
         return (
-            <Profile {...this.props}
+            <Profile
                 profileUser={this.props.profileUser}
             />
         )
     }
 }
 
-let MapStateProps = (state:StateReduxStorType)=> {
+let MapStateProps = (state: StateType): MapStatePropsType => {
     return {
-        profileUser : state.profileState.profileUser
+        profileUser: state.profileState.profileUser
     }
 }
 
-/*type MapStatePropsType = {
-    profileUser:GetProfileType
-}
 type MapDispatchPropsType = {
-    setProfileUsers:(profileUser:GetProfileType)=>void
+    setProfileUsers: (profileUser: GetProfileType) => void
 }
-export  type ProfilePropsType = MapStatePropsType & MapDispatchPropsType*/
+
+type MapStatePropsType = {
+    profileUser: GetProfileType
+}
+
+export type ProfilePropsType = MapStatePropsType & MapDispatchPropsType
+
 
 let WithURLComponent = withRouter(ProfileContainer)
 
-export default connect(MapStateProps,{setProfileUsers})(WithURLComponent)
+export default connect(MapStateProps, {setProfileUsers})(WithURLComponent)

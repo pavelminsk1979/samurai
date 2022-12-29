@@ -4,16 +4,16 @@ import MyPostContainer from "./MyPost/MyPostContainer";
 import {GetProfileType} from "../../common/Types/getProfileType";
 
 
-type ProfileType = {
-    profileUser:GetProfileType
+type PropsType = {
+    profileUser: GetProfileType
 }
 
-export function Profile(props:ProfileType) {
+export function Profile(props: PropsType) {
 
     return (
         <div>
             <ProfileInfo profileUser={props.profileUser}/>
-            <MyPostContainer />
+            <MyPostContainer/>
         </div>
     )
 }

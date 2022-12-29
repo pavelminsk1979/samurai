@@ -1,9 +1,11 @@
+import {ContactsType, GetProfileType, PhotosType} from "../../common/Types/getProfileType";
+
 export type ProfilePostType = {
     id: number
     text: string
 }
 
-const initialStateProfilePost = {
+const initState = {
     posts: [
         {id: 1, text: 'mmmm...'},
         {id: 2, text: 'What is it'},
@@ -11,12 +13,32 @@ const initialStateProfilePost = {
 
     ] as Array<ProfilePostType>,
     newPost: '',
-    profileUser:null
+    profileUser: {
+        aboutMe: '',
+        contacts: {
+            facebook: '',
+            website: '',
+            vk: '',
+            twitter: '',
+            instagram: '',
+            youtube: '',
+            github: '',
+            mainLink: '',
+        } as ContactsType,
+        fullName: '',
+        lookingForAJob: false,
+        lookingForAJobDescription: '',
+        photos: {
+            small: '',
+            large: ''
+        } as PhotosType,
+        userId: 1
+    } as GetProfileType
 }
 
-export type initialStateProfilePostType = typeof initialStateProfilePost
+export type InitStateType = typeof initState
 
-export const profileReduser = (state: initialStateProfilePostType = initialStateProfilePost, action: ActionType): initialStateProfilePostType => {
+export const profileReduser = (state: InitStateType =  initState, action: ActionType): InitStateType => {
 
     switch (action.type) {
         case 'ADDED-POST-STATE': {
@@ -30,8 +52,8 @@ export const profileReduser = (state: initialStateProfilePostType = initialState
 
             return {...state, newPost: action.symbolTaxtarea};
         }
-        case "SET-PROFILE-USER":{
-            return {...state,profileUser:action.profileUser}
+        case "SET-PROFILE-USER": {
+            return {...state, profileUser: action.profileUser}
         }
         default:
             return state
@@ -44,7 +66,7 @@ type ActionType = createTextInTextareaACType
 
 
 type setProfileUsersType = ReturnType<typeof setProfileUsers>
-export const setProfileUsers = (profileUser:any) => {
+export const setProfileUsers = (profileUser: GetProfileType) => {
     return {
         type: 'SET-PROFILE-USER',
         profileUser

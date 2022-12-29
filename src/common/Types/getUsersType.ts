@@ -1,19 +1,8 @@
+import {ParticipanType} from "../../redux/reduser/participantsReduser";
+
 export type GetUsersType = {
     error: null|string
-    items: Array<UserType>
+    items: Array<ParticipanType>
     totalCount:number
 }
 
-type UserType = {
-name:string
-    id: number
-    uniqueUrlName: null|string
-    photos: PhotosType
-    status: null|string
-    followed:boolean
-}
-
-type PhotosType = {
-    small: null|string
-    large: null|string
-}
