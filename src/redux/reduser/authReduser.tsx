@@ -1,9 +1,9 @@
 import {LoginAuthMeType} from "../../common/Types/getLoginAuthMeType";
 
 const initialState = {
-    id: null as null | number,
-    login: null as null | string,
-    email: null as null | string,
+    id:1,
+    login: '',
+    email: '',
     isLogin: false
 }
 
@@ -24,7 +24,6 @@ type ActionType = setDataLoginWithServerType
 
 type setDataLoginWithServerType = ReturnType<typeof setDataLoginWithServer>
 export const setDataLoginWithServer = (dataLoginWithServer: LoginAuthMeType) => {
-    debugger
     return {
         type: 'SET-DATA-LOGIN-WITH-SERVER',
         dataLoginWithServer

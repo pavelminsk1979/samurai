@@ -8,13 +8,14 @@ import {Settings} from "./components/Settings/Settings";
 import ParticipantsContainer from "./components/Participants/ParticipantsContainer";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
-import HeaderComponent from './components/Header/HeaderContainer';
+import HeaderContainer from './components/Header/HeaderContainer';
+
 
 
 const App = () => {
     return (
         <div className={st.app}>
-            <HeaderComponent/>
+            <HeaderContainer/>
             <NavBar/>
             <div className={st.content}>
                 <Route

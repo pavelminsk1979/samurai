@@ -6,7 +6,7 @@ export type getLoginAuthMeType = {
 }
 
 export type LoginAuthMeType = {
-    id: null|number
-    login:null|string
-    email: null|string
+    id: number
+    login:string
+    email:string
 }
