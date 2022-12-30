@@ -1,10 +1,10 @@
 import React from "react";
 import st from './ProfileInfo.module.css'
 import {Loading} from "../../../common/components/Loading";
-import {GetProfileType} from "../../../common/Types/getProfileType";
+import {ProfilesType} from "../../../api/api";
 
 type HeaderProfileType = {
-    profileUser: GetProfileType
+    profileUser: ProfilesType
 }
 
 export function ProfileInfo(props: HeaderProfileType) {

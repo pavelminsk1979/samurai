@@ -1,18 +1,18 @@
 import {
     addedMessageStatetAC, creatingMessageinTextareaAC, MessageType, UserNameType
-} from "../../redux/reduser/dialogsReduser";
+} from "../../redux/reduser/dialogReduсer";
 import {connect} from "react-redux";
 import {Dialogs} from "./Dialogs";
-import {StateType} from "../../redux/reduser/reduxStor";
+import {StateType} from "../../redux/reduser/reduxStore";
 import {Dispatch} from "redux";
 
 
 
 const mapStateToProps= (state:StateType):MapStatePropsType => {
     return{
-        userName:state.dialogsState.userName,
-        newMessageForState:state.dialogsState.newMessageForState,
-    messageState:state.dialogsState.messageState,
+        userName:state.dialogState.userName,
+        newMessageForState:state.dialogState.newMessageForState,
+    messageState:state.dialogState.messageState,
     }
 }
 const mapDispatchToProps = (dispatch:Dispatch):MapDispatchPropsType => {

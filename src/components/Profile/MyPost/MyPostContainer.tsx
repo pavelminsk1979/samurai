@@ -1,7 +1,7 @@
 import {MyPost} from "./MyPost";
-import {addedPostInStateAC, createTextInTextareaAC, ProfilePostType} from "../../../redux/reduser/profileReduser";
+import {addedPostInStateAC, createTextInTextareaAC, ProfilePostType} from "../../../redux/reduser/profileReduсer";
 import {connect} from "react-redux";
-import {StateType} from "../../../redux/reduser/reduxStor";
+import {StateType} from "../../../redux/reduser/reduxStore";
 import {Dispatch} from "redux";
 
 

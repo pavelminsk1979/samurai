@@ -1,13 +1,5 @@
-export type ParticipanType = {
-    id: number,
-    name: string,
-    followed: boolean, /* полезная для меня анкета или нет*/
-    status: string
-    photos: {
-        small: string,
-        large: string
-    }
-}
+import { ParticipanType } from "../../api/api"
+
 
 const initialParticipantsState: initialParticipantsStateType = {
     participants: [],
@@ -25,7 +17,7 @@ export type initialParticipantsStateType = {
     isLoading: boolean
 }
 
-export const participantsReduser = (state: initialParticipantsStateType = initialParticipantsState, action: ActionType): initialParticipantsStateType => {
+export const participantReduсer = (state: initialParticipantsStateType = initialParticipantsState, action: ActionType): initialParticipantsStateType => {
 
     switch (action.type) {
         case 'FOLLOW-PARTICIPANT': {

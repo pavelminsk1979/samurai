@@ -1,21 +1,21 @@
 import {connect} from "react-redux";
-import {StateType} from "../../redux/reduser/reduxStor";
+import {StateType} from "../../redux/reduser/reduxStore";
 import {
     changeIsLoading, followParticipant,
-    ParticipanType,
     setActivePage,
     setParticipants, setTotalCount, unFollowParticipant
-} from "../../redux/reduser/participantsReduser";
+} from "../../redux/reduser/participantReduсer";
 import ParticipantsAxiosQueryComponents from "./ParticipantsAxiosQueryComponents";
+import { ParticipanType } from "../../api/api";
 
 
 const mapStateToPropse = (state: StateType): MapStatePropsType => {
     return {
-        participants: state.participantsState.participants,
-        count: state.participantsState.count,
-        totalCount: state.participantsState.totalCount,
-        activePage: state.participantsState.activePage,
-        isLoading: state.participantsState.isLoading
+        participants: state.participantState.participants,
+        count: state.participantState.count,
+        totalCount: state.participantState.totalCount,
+        activePage: state.participantState.activePage,
+        isLoading: state.participantState.isLoading
     }
 }
 

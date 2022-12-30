@@ -1,18 +1,15 @@
 import React from "react";
 import { HeaderType } from "./HeaderContainer";
-import axios from "axios";
-import { getLoginAuthMeType } from "../../common/Types/getLoginAuthMeType";
 import { Header } from "./Header";
+import {authAPI} from "../../api/api";
 
 class HeaderAxiosQueryComponent extends React.Component<HeaderType> {
 
     componentDidMount() {
-        axios.get <getLoginAuthMeType>(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
-            withCredentials: true
-        })
-            .then((response) => {
-                if (response.data.resultCode === 0) {
-                    this.props.setDataLoginWithServer(response.data.data)
+        authAPI.getAuthMe()
+            .then((data) => {
+                if (data.resultCode === 0) {
+                    this.props.setDataLoginWithServer(data.data)
                 }
             })
     }

@@ -1,9 +1,9 @@
 
 import {connect} from "react-redux";
-import {setDataLoginWithServer} from "../../redux/reduser/authReduser";
-import { LoginAuthMeType} from "../../common/Types/getLoginAuthMeType";
-import {StateType} from "../../redux/reduser/reduxStor";
+import {setDataLoginWithServer} from "../../redux/reduser/authReduсer";
+import {StateType} from "../../redux/reduser/reduxStore";
 import HeaderAxiosQueryComponent from "./HeaderAxiosQueryComponent";
+import {DataAuthMeType} from "../../api/api";
 
 
 const mapStateToPropse = (state: StateType): mapStateToPropseType => {
@@ -22,7 +22,7 @@ export type mapStateToPropseType = {
     email:  string
 }
 type MapDispatchToPropsType = {
-    setDataLoginWithServer: (dataLoginWithServer: LoginAuthMeType) => void
+    setDataLoginWithServer: (dataLoginWithServer: DataAuthMeType) => void
 }
 export type HeaderType = mapStateToPropseType & MapDispatchToPropsType
 

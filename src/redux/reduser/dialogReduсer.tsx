@@ -29,7 +29,7 @@ const initialMessageState={
 
 export type initialMessageStateType=typeof initialMessageState
 
-export const dialogsReduser= (state:initialMessageStateType=initialMessageState,action:ActionType):initialMessageStateType=>{
+export const dialogReduсer= (state:initialMessageStateType=initialMessageState, action:ActionType):initialMessageStateType=>{
     switch (action.type) {
         case 'ADDED-MESSAGE-USER-STATE': {
             return {...state,messageState:[{id:6,message:state.newMessageForState},...state.messageState]}

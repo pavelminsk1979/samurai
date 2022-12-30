@@ -1,4 +1,5 @@
-import {LoginAuthMeType} from "../../common/Types/getLoginAuthMeType";
+import {DataAuthMeType} from "../../api/api";
+
 
 const initialState = {
     id:1,
@@ -9,7 +10,7 @@ const initialState = {
 
 export type initialStateType = typeof initialState
 
-export const authReduser = (state: initialStateType = initialState, action: ActionType): initialStateType => {
+export const authReduсer = (state: initialStateType = initialState, action: ActionType): initialStateType => {
     switch (action.type) {
         case 'SET-DATA-LOGIN-WITH-SERVER': {
             return {...state, ...action.dataLoginWithServer, isLogin: true}
@@ -23,7 +24,7 @@ export const authReduser = (state: initialStateType = initialState, action: Acti
 type ActionType = setDataLoginWithServerType
 
 type setDataLoginWithServerType = ReturnType<typeof setDataLoginWithServer>
-export const setDataLoginWithServer = (dataLoginWithServer: LoginAuthMeType) => {
+export const setDataLoginWithServer = (dataLoginWithServer: DataAuthMeType) => {
     return {
         type: 'SET-DATA-LOGIN-WITH-SERVER',
         dataLoginWithServer

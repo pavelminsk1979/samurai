@@ -1,11 +1,12 @@
 import React from "react";
 import {ProfileInfo} from "./Profile/ProfileInfo";
 import MyPostContainer from "./MyPost/MyPostContainer";
-import {GetProfileType} from "../../common/Types/getProfileType";
+import {ProfilesType} from "../../api/api";
+
 
 
 type PropsType = {
-    profileUser: GetProfileType
+    profileUser: ProfilesType
 }
 
 export function Profile(props: PropsType) {

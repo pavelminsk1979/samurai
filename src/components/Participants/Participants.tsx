@@ -1,9 +1,9 @@
 import React from 'react';
 import userFoto from '../../assets/images/blackMan.jpg'
 import st from './Participant.module.css'
-import {ParticipanType} from "../../redux/reduser/participantsReduser";
 import {NavLink} from 'react-router-dom';
 import axios from "axios";
+import {ParticipanType} from "../../api/api";
 
 
 type ParticipantsType = {

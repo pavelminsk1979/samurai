@@ -1,4 +1,5 @@
-import {ContactsType, GetProfileType, PhotosType} from "../../common/Types/getProfileType";
+import {ContactsType, ProfilesType} from "../../api/api"
+
 
 export type ProfilePostType = {
     id: number
@@ -31,14 +32,14 @@ const initState = {
         photos: {
             small: '',
             large: ''
-        } as PhotosType,
+        },
         userId: 1
-    } as GetProfileType
+    } as ProfilesType
 }
 
 export type InitStateType = typeof initState
 
-export const profileReduser = (state: InitStateType =  initState, action: ActionType): InitStateType => {
+export const profileReduсer = (state: InitStateType =  initState, action: ActionType): InitStateType => {
 
     switch (action.type) {
         case 'ADDED-POST-STATE': {
@@ -66,7 +67,7 @@ type ActionType = createTextInTextareaACType
 
 
 type setProfileUsersType = ReturnType<typeof setProfileUsers>
-export const setProfileUsers = (profileUser: GetProfileType) => {
+export const setProfileUsers = (profileUser: ProfilesType) => {
     return {
         type: 'SET-PROFILE-USER',
         profileUser
