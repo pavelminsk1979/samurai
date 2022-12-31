@@ -2,8 +2,7 @@ import React from 'react';
 import userFoto from '../../assets/images/blackMan.jpg'
 import st from './Participant.module.css'
 import {NavLink} from 'react-router-dom';
-import axios from "axios";
-import {ParticipanType} from "../../api/api";
+import {followAPI, ParticipanType} from "../../api/api";
 
 
 type ParticipantsType = {
@@ -14,6 +13,8 @@ type ParticipantsType = {
     activePage: number
     participants: Array<ParticipanType>
     setActivePageHandler: (activePagesNumber: number) => void
+    changeDisabledStatus: (userId:number,value:boolean) => void
+    disabled:Array<number>
 }
 
 export const Participants = (props: ParticipantsType) => {
@@ -61,35 +62,31 @@ export const Participants = (props: ParticipantsType) => {
                               </div>
                               {
                                   el.followed
-                                      ? <button onClick={() => {
-                                          let userId = el.id
-                                          axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, {
-                                              withCredentials: true, headers: {
-                                                  'API-KEY': 'b48cd3f5-7cda-4a22-b331-9292412429bd'
-                                              }
-                                          })
-                                              .then(response => {
-                                                  if (response.data.resultCode === 0) {
-                                                      props.unFollowParticipant(el.id)
-                                                  }
-                                              })
-                                      }
-                                      }>FRIEND</button>
+                                      ? <button disabled={props.disabled.some(elem=>elem===el.id)}
+                                                onClick={() => {
+                                                    props.changeDisabledStatus(el.id,true)
+                                                    followAPI.deleteFollow(el.id)
+                                                        .then(data => {
+                                                            if (data.resultCode === 0) {
+                                                                props.unFollowParticipant(el.id)
+                                                            }
+                                                            props.changeDisabledStatus(el.id,false)
+                                                        })
+                                                }
+                                                }>FRIEND</button>
 
-                                      : <button onClick={() => {
-                                          let userId = el.id
-                                          axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, {}, {
-                                              withCredentials: true, headers: {
-                                                  'API-KEY': 'b48cd3f5-7cda-4a22-b331-9292412429bd'
-                                              }
-                                          })
-                                              .then(response => {
-                                                  if (response.data.resultCode === 0) {
-                                                      props.followParticipant(el.id)
-                                                  }
-                                              })
-                                      }
-                                      }>PERSON</button>
+                                      : <button disabled={props.disabled.some(elem=>elem===el.id)}
+                                                onClick={() => {
+                                                    props.changeDisabledStatus(el.id,true)
+                                                    followAPI.postFollow(el.id)
+                                                        .then(data => {
+                                                            if (data.resultCode === 0) {
+                                                                props.followParticipant(el.id)
+                                                            }
+                                                            props.changeDisabledStatus(el.id,false)
+                                                        })
+                                                }
+                                                }>PERSON</button>
                               }
 
                           </span>

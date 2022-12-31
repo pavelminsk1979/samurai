@@ -11,6 +11,8 @@ const instance = axios.create(
     }
 )
 
+
+
 export const usersAPI = {
     getParticipants(activePage: number, count: number) {
         return instance.get <UsersType>(`users?page=${activePage}&count=${count}`)
@@ -37,6 +39,29 @@ export const profilesAPI = {
             })
     }
 }
+
+export const followAPI = {
+    postFollow (userId:number) {
+        return instance.post<FollowType>(`follow/${userId}`, {})
+            .then(response => {
+                return response.data
+            })
+    },
+
+    deleteFollow (userId:number) {
+        return instance.delete<FollowType>(`follow/${userId}`)
+            .then(response => {
+                return response.data
+            })
+    }
+}
+
+export type FollowType = {
+    resultCode: number
+    messages: Array<string>,
+    data: {}
+}
+
 
 export type ProfilesType = {
     aboutMe: string

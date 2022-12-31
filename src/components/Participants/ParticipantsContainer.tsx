@@ -1,6 +1,7 @@
 import {connect} from "react-redux";
 import {StateType} from "../../redux/reduser/reduxStore";
 import {
+    changeDisabledValue,
     changeIsLoading, followParticipant,
     setActivePage,
     setParticipants, setTotalCount, unFollowParticipant
@@ -15,7 +16,8 @@ const mapStateToPropse = (state: StateType): MapStatePropsType => {
         count: state.participantState.count,
         totalCount: state.participantState.totalCount,
         activePage: state.participantState.activePage,
-        isLoading: state.participantState.isLoading
+        isLoading: state.participantState.isLoading,
+        disabled:state.participantState.disabled
     }
 }
 
@@ -25,6 +27,7 @@ type MapStatePropsType = {
     totalCount: number
     activePage: number
     isLoading: boolean
+    disabled: Array<number>
 }
 type MapDispatchPropsType = {
     followParticipant: (idPartisipant: number) => void
@@ -33,6 +36,7 @@ type MapDispatchPropsType = {
     setActivePage: (activePagesNumber: number) => void
     setTotalCount: (totalCount: number) => void
     changeIsLoading: (loading: boolean) => void
+    changeDisabledStatus:(userId:number,value:boolean)=>void
 
 }
 
@@ -44,5 +48,6 @@ export default connect(mapStateToPropse, {
     setParticipants,
     setActivePage,
     setTotalCount,
-    changeIsLoading
+    changeIsLoading,
+    changeDisabledStatus: changeDisabledValue
 })(ParticipantsAxiosQueryComponents)

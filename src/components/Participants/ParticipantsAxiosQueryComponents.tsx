@@ -35,6 +35,9 @@ class ParticipantsAxiosQueryComponents extends React.Component<ParticipantsProps
             {this.props.isLoading && <Loading/>}
 
             <Participants
+                disabled={this.props.disabled}
+                changeDisabledStatus={(
+                    userId:number,value:boolean)=>this.props.changeDisabledStatus(userId,value)}
                 totalCount={this.props.totalCount}
                 count={this.props.count}
                 followParticipant={(id: number) => this.props.followParticipant(id)}

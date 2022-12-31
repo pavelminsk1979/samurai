@@ -1,4 +1,4 @@
-import { ParticipanType } from "../../api/api"
+import {ParticipanType} from "../../api/api"
 
 
 const initialParticipantsState: initialParticipantsStateType = {
@@ -6,7 +6,8 @@ const initialParticipantsState: initialParticipantsStateType = {
     count: 100,
     totalCount: 0,
     activePage: 1,
-    isLoading: false
+    isLoading: false,
+    disabled: []  /*элемент массива это будут id*/
 }
 
 export type initialParticipantsStateType = {
@@ -15,6 +16,7 @@ export type initialParticipantsStateType = {
     totalCount: number
     activePage: number
     isLoading: boolean
+    disabled: Array<number>
 }
 
 export const participantReduсer = (state: initialParticipantsStateType = initialParticipantsState, action: ActionType): initialParticipantsStateType => {
@@ -48,11 +50,30 @@ export const participantReduсer = (state: initialParticipantsStateType = initia
         case "CHANGE-ISLOADING": {
             return {...state, isLoading: action.loading}
         }
+        case "CHANGE-DISABLED-STATUS": {
+            return {
+                ...state,
+                disabled:action.value
+                ? [...state.disabled,action.userId]
+                : state.disabled.filter(id => id !==action.userId)
+                /*элемент массива это  id*/
+            }
+        }
 
         default:
             return state
     }
 }
+
+export type changeDisabledValueType = ReturnType<typeof changeDisabledValue>
+export const changeDisabledValue = (userId:number, value: boolean) => {
+    return {
+        type: 'CHANGE-DISABLED-STATUS',
+        userId,
+        value
+    } as const
+}
+
 
 type unFollowParticipantType = ReturnType<typeof unFollowParticipant>
 export const unFollowParticipant = (idPartisipant: number) => {
@@ -112,3 +133,4 @@ type ActionType = setTotalCountACType
     | followParticipantType
     | changeIsLoadingACType
     | unFollowParticipantType
+    | changeDisabledValueType
