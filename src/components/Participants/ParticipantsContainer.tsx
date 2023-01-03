@@ -1,10 +1,9 @@
 import {connect} from "react-redux";
 import {StateType} from "../../redux/reduser/reduxStore";
 import {
-    changeDisabledValue,
-    changeIsLoading, followParticipant,
-    setActivePage,
-    setParticipants, setTotalCount, unFollowParticipant
+    deleteFriend,
+    getPaticipants,
+    setFriend, showPaticipants
 } from "../../redux/reduser/participantReduсer";
 import ParticipantsAxiosQueryComponents from "./ParticipantsAxiosQueryComponents";
 import { ParticipanType } from "../../api/api";
@@ -30,24 +29,17 @@ type MapStatePropsType = {
     disabled: Array<number>
 }
 type MapDispatchPropsType = {
-    followParticipant: (idPartisipant: number) => void
-    unFollowParticipant: (idPartisipant: number) => void
-    setParticipants: (participants: Array<ParticipanType>) => void
-    setActivePage: (activePagesNumber: number) => void
-    setTotalCount: (totalCount: number) => void
-    changeIsLoading: (loading: boolean) => void
-    changeDisabledStatus:(userId:number,value:boolean)=>void
-
+    showPaticipants: (activePage:number ,count:number) => void
+    getPaticipants:(activePage:number ,count:number)=>void
+    deleteFriend:(idPartisipant: number)=>void
+    setFriend:(idPartisipant: number)=>void
 }
 
 export type ParticipantsPropsType = MapStatePropsType & MapDispatchPropsType
 
 export default connect(mapStateToPropse, {
-    unFollowParticipant,
-    followParticipant,
-    setParticipants,
-    setActivePage,
-    setTotalCount,
-    changeIsLoading,
-    changeDisabledStatus: changeDisabledValue
+    setFriend,
+    deleteFriend,
+    getPaticipants,
+    showPaticipants,
 })(ParticipantsAxiosQueryComponents)

@@ -1,17 +1,11 @@
 import React from "react";
-import { HeaderType } from "./HeaderContainer";
-import { Header } from "./Header";
-import {authAPI} from "../../api/api";
+import {HeaderType} from "./HeaderContainer";
+import {Header} from "./Header";
+
 
 class HeaderAxiosQueryComponent extends React.Component<HeaderType> {
-
     componentDidMount() {
-        authAPI.getAuthMe()
-            .then((data) => {
-                if (data.resultCode === 0) {
-                    this.props.setDataLoginWithServer(data.data)
-                }
-            })
+        this.props.getAuthMe()
     }
 
     render() {
@@ -19,10 +13,8 @@ class HeaderAxiosQueryComponent extends React.Component<HeaderType> {
                        isLogin={this.props.isLogin}
                        id={this.props.id}
                        login={this.props.login}
-                       email={this.props.email}
-                       setDataLoginWithServer={this.props.setDataLoginWithServer}
-        />
-
+                       email={this.props.email}/>
     }
 }
+
 export default HeaderAxiosQueryComponent

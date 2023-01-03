@@ -1,4 +1,5 @@
-import {ParticipanType} from "../../api/api"
+import {followAPI, ParticipanType, usersAPI} from "../../api/api"
+import {Dispatch} from "redux";
 
 
 const initialParticipantsState: initialParticipantsStateType = {
@@ -42,7 +43,7 @@ export const participantReduсer = (state: initialParticipantsStateType = initia
             return {...state, participants: action.participants}
         }
         case "SET-ACTIVE-PAGE": {
-            return {...state, activePage: action.activePagesNumber}
+            return {...state, activePage: action.activePage}
         }
         case "SET-TOTALCOUNT": {
             return {...state, totalCount: action.count}
@@ -65,8 +66,8 @@ export const participantReduсer = (state: initialParticipantsStateType = initia
     }
 }
 
-export type changeDisabledValueType = ReturnType<typeof changeDisabledValue>
-export const changeDisabledValue = (userId:number, value: boolean) => {
+export type changeDisabledStatusType = ReturnType<typeof changeDisabledStatus>
+export const changeDisabledStatus = (userId:number, value: boolean) => {
     return {
         type: 'CHANGE-DISABLED-STATUS',
         userId,
@@ -112,10 +113,10 @@ export const setParticipants = (participants: Array<ParticipanType>) => {
 }
 
 type setActivePageACType = ReturnType<typeof setActivePage>
-export const setActivePage = (activePagesNumber: number) => {
+export const setActivePage = (activePage: number) => {
     return {
         type: 'SET-ACTIVE-PAGE',
-        activePagesNumber
+        activePage
     } as const
 }
 
@@ -127,10 +128,59 @@ export const setTotalCount = (totalCount: number) => {
     } as const
 }
 
+
+/*thunk*/
+export const setFriend = (idPartisipant: number) => (dispatch:Dispatch) => {
+    dispatch (changeDisabledStatus(idPartisipant,true))
+    followAPI.postFollow(idPartisipant)
+        .then(data => {
+            if (data.resultCode === 0) {
+                dispatch  (followParticipant(idPartisipant))
+            }
+            dispatch(changeDisabledStatus(idPartisipant,false))
+        })
+}
+
+
+export const deleteFriend = (idPartisipant: number) => (dispatch:Dispatch) => {
+    dispatch (changeDisabledStatus(idPartisipant,true))
+    followAPI.deleteFollow(idPartisipant)
+        .then(data => {
+            if (data.resultCode === 0) {
+                dispatch(unFollowParticipant(idPartisipant))
+            }
+            dispatch(changeDisabledStatus(idPartisipant,false))
+        })
+}
+
+
+export const getPaticipants = (activePage:number ,count:number) => (dispatch:Dispatch) => {
+    dispatch (changeIsLoading(true))
+    usersAPI.getParticipants(activePage, count)
+        .then((data) => {
+            dispatch (changeIsLoading(false))
+            dispatch(setParticipants(data.items))
+            dispatch(setTotalCount(data.totalCount))
+        })
+}
+
+export const showPaticipants = (activePage:number ,count:number) => (dispatch:Dispatch) => {
+    dispatch (changeIsLoading(true))
+    usersAPI.getParticipants(activePage, count)
+        .then((data) => {
+            dispatch(setParticipants(data.items))
+            dispatch(setActivePage(activePage))
+            dispatch (changeIsLoading(false))
+        })
+}
+
+
+
+
 type ActionType = setTotalCountACType
     | setActivePageACType
     | setParticipantsACType
     | followParticipantType
     | changeIsLoadingACType
     | unFollowParticipantType
-    | changeDisabledValueType
+    | changeDisabledStatusType

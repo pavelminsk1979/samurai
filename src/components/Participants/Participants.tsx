@@ -2,19 +2,19 @@ import React from 'react';
 import userFoto from '../../assets/images/blackMan.jpg'
 import st from './Participant.module.css'
 import {NavLink} from 'react-router-dom';
-import {followAPI, ParticipanType} from "../../api/api";
+import {ParticipanType} from "../../api/api";
 
 
 type ParticipantsType = {
     totalCount: number
     count: number
-    followParticipant: (id: number) => void
-    unFollowParticipant: (id: number) => void
     activePage: number
     participants: Array<ParticipanType>
-    setActivePageHandler: (activePagesNumber: number) => void
-    changeDisabledStatus: (userId:number,value:boolean) => void
-    disabled:Array<number>
+    showPaticipants: (activePage:number ,count:number) => void
+    disabled: Array<number>
+    deleteFriend: (idPartisipant: number) => void
+    setFriend: (idPartisipant: number) => void
+    getPaticipants:(activePage:number ,count:number)=>void
 }
 
 export const Participants = (props: ParticipantsType) => {
@@ -26,6 +26,10 @@ export const Participants = (props: ParticipantsType) => {
         pageCount.push(i)
     }
 
+    const setActivePageHandler = (activePage: number) => {
+        props.showPaticipants(activePage,props.count)
+    }
+
     return (
         <div>
 
@@ -35,7 +39,7 @@ export const Participants = (props: ParticipantsType) => {
                         <span>
                                 <button
                                     onClick={() => {
-                                        props.setActivePageHandler(e)
+                                        setActivePageHandler(e)
                                     }}
                                     className={
                                         props.activePage === e ? st.paginationButton : ''}
@@ -62,29 +66,17 @@ export const Participants = (props: ParticipantsType) => {
                               </div>
                               {
                                   el.followed
-                                      ? <button disabled={props.disabled.some(elem=>elem===el.id)}
+                                      ? <button disabled={props.disabled.some(
+                                          elem => elem === el.id)}
                                                 onClick={() => {
-                                                    props.changeDisabledStatus(el.id,true)
-                                                    followAPI.deleteFollow(el.id)
-                                                        .then(data => {
-                                                            if (data.resultCode === 0) {
-                                                                props.unFollowParticipant(el.id)
-                                                            }
-                                                            props.changeDisabledStatus(el.id,false)
-                                                        })
+                                                    props.deleteFriend(el.id)
                                                 }
                                                 }>FRIEND</button>
 
-                                      : <button disabled={props.disabled.some(elem=>elem===el.id)}
+                                      : <button disabled={props.disabled.some(
+                                          elem => elem === el.id)}
                                                 onClick={() => {
-                                                    props.changeDisabledStatus(el.id,true)
-                                                    followAPI.postFollow(el.id)
-                                                        .then(data => {
-                                                            if (data.resultCode === 0) {
-                                                                props.followParticipant(el.id)
-                                                            }
-                                                            props.changeDisabledStatus(el.id,false)
-                                                        })
+                                                    props.setFriend(el.id)
                                                 }
                                                 }>PERSON</button>
                               }

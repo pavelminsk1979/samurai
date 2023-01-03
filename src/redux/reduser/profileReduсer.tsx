@@ -1,4 +1,5 @@
-import {ContactsType, ProfilesType} from "../../api/api"
+import {ContactsType, profilesAPI, ProfilesType} from "../../api/api"
+import {Dispatch} from "redux";
 
 
 export type ProfilePostType = {
@@ -39,7 +40,7 @@ const initState = {
 
 export type InitStateType = typeof initState
 
-export const profileReduсer = (state: InitStateType =  initState, action: ActionType): InitStateType => {
+export const profileReduсer = (state: InitStateType = initState, action: ActionType): InitStateType => {
 
     switch (action.type) {
         case 'ADDED-POST-STATE': {
@@ -54,6 +55,7 @@ export const profileReduсer = (state: InitStateType =  initState, action: Actio
             return {...state, newPost: action.symbolTaxtarea};
         }
         case "SET-PROFILE-USER": {
+            console.log('trigger')
             return {...state, profileUser: action.profileUser}
         }
         default:
@@ -88,4 +90,12 @@ export const createTextInTextareaAC = (symbolTaxtarea: string) => {
         type: 'CREATING-POST-IN-TEXTAREA',
         symbolTaxtarea
     } as const
+}
+
+/*thunk*/
+export const getProfiles = (userId: string) => (dispatch: Dispatch) => {
+    profilesAPI.getProfiles(userId)
+        .then((data) => {
+            dispatch(setProfileUsers(data))
+        })
 }
