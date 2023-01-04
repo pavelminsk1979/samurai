@@ -1,11 +1,12 @@
 import React from 'react';
 import userFoto from '../../assets/images/blackMan.jpg'
 import st from './Participant.module.css'
-import {NavLink} from 'react-router-dom';
+import {NavLink, Redirect} from 'react-router-dom';
 import {ParticipanType} from "../../api/api";
 
 
 type ParticipantsType = {
+    isLogin:boolean
     totalCount: number
     count: number
     activePage: number
@@ -28,6 +29,10 @@ export const Participants = (props: ParticipantsType) => {
 
     const setActivePageHandler = (activePage: number) => {
         props.showPaticipants(activePage,props.count)
+    }
+
+    if(props.isLogin===false){
+        return <Redirect to={'/login'}/>
     }
 
     return (

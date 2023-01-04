@@ -9,6 +9,7 @@ import ParticipantsContainer from "./components/Participants/ParticipantsContain
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from './components/Header/HeaderContainer';
+import {Login} from "./components/Login/Login";
 
 
 
@@ -30,6 +31,7 @@ const App = () => {
                 <Route
                     path='/participants'
                     render={() => <ParticipantsContainer/>}/>
+                <Route path='/login' component={Login}/>
             </div>
         </div>
 

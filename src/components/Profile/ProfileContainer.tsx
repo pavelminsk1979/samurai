@@ -25,6 +25,7 @@ class ProfileContainer extends React.Component<ResultProfilePropsType> {
     render() {
         return (
             <Profile
+                isLogin={this.props.isLogin}
                 profileUser={this.props.profileUser}
             />
         )
@@ -33,7 +34,9 @@ class ProfileContainer extends React.Component<ResultProfilePropsType> {
 
 let MapStateProps = (state: StateType): MapStatePropsType => {
     return {
-        profileUser: state.profileState.profileUser
+        profileUser: state.profileState.profileUser,
+        isLogin:state.auth.isLogin
+
     }
 }
 
@@ -43,6 +46,7 @@ type MapDispatchPropsType = {
 
 type MapStatePropsType = {
     profileUser: ProfilesType
+    isLogin:boolean
 }
 
 export type ProfilePropsType = MapStatePropsType & MapDispatchPropsType

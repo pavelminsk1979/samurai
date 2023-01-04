@@ -16,7 +16,8 @@ const mapStateToPropse = (state: StateType): MapStatePropsType => {
         totalCount: state.participantState.totalCount,
         activePage: state.participantState.activePage,
         isLoading: state.participantState.isLoading,
-        disabled:state.participantState.disabled
+        disabled:state.participantState.disabled,
+        isLogin:state.auth.isLogin
     }
 }
 
@@ -27,6 +28,7 @@ type MapStatePropsType = {
     activePage: number
     isLoading: boolean
     disabled: Array<number>
+    isLogin:boolean
 }
 type MapDispatchPropsType = {
     showPaticipants: (activePage:number ,count:number) => void

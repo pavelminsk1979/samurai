@@ -18,6 +18,7 @@ class ParticipantsAxiosQueryComponents extends React.Component<ParticipantsProps
             {this.props.isLoading && <Loading/>}
 
             <Participants
+                isLogin={this.props.isLogin}
                 getPaticipants={this.props.getPaticipants}
                 setFriend={this.props.setFriend}
                 deleteFriend={this.props.deleteFriend}
