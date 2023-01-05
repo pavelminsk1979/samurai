@@ -8,6 +8,8 @@ import {
 import ParticipantsAxiosQueryComponents from "./ParticipantsAxiosQueryComponents";
 import { ParticipanType } from "../../api/api";
 import {HocRedirectLogin} from "../../hoc/RedirectLogin";
+import {compose} from "redux";
+import {FC} from "react";
 
 
 
@@ -39,13 +41,16 @@ type MapDispatchPropsType = {
     setFriend:(idPartisipant: number)=>void
 }
 
-const RedirectLogin = HocRedirectLogin(ParticipantsAxiosQueryComponents)
-
 export type ParticipantsPropsType = MapStatePropsType & MapDispatchPropsType
 
-export default connect(mapStateToPropse, {
-    setFriend,
-    deleteFriend,
-    getPaticipants,
-    showPaticipants,
-})(RedirectLogin)
+
+export default compose<FC>(
+    connect(mapStateToPropse, {
+        setFriend,
+        deleteFriend,
+        getPaticipants,
+        showPaticipants,
+    }),
+    HocRedirectLogin
+)(ParticipantsAxiosQueryComponents)
+

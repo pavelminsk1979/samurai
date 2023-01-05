@@ -1,5 +1,5 @@
 import {Redirect} from "react-router-dom";
-import React, {ComponentType, FC} from "react";
+import React, {ComponentType} from "react";
 import {StateType} from "../redux/reduser/reduxStore";
 import {connect} from "react-redux";
 

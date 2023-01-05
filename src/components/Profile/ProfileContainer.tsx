@@ -1,4 +1,4 @@
-import React from "react";
+import React, {FC} from "react";
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
 import {StateType} from "../../redux/reduser/reduxStore";
@@ -6,6 +6,7 @@ import {getProfiles} from "../../redux/reduser/profileReduсer";
 import { RouteComponentProps, withRouter} from "react-router-dom";
 import {ProfilesType} from "../../api/api";
 import {HocRedirectLogin} from "../../hoc/RedirectLogin";
+import {compose} from "redux";
 
 
 type PathParamsType = {
@@ -51,8 +52,9 @@ type MapStatePropsType = {
 
 export type ProfilePropsType = MapStatePropsType & MapDispatchPropsType
 
-const RedirectLogin=HocRedirectLogin(ProfileContainer)
 
-let WithDataContainerComponent = withRouter(RedirectLogin)
+export default compose<FC>(
+    connect(MapStateProps, {getProfiles}),
+    withRouter,
+    HocRedirectLogin)(ProfileContainer)
 
-export default connect(MapStateProps, {getProfiles})(WithDataContainerComponent)

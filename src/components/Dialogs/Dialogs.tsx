@@ -1,11 +1,11 @@
 import st from './Dialogs.module.css'
 import {MessageUser} from "./MessageUser/MessageUser";
-import React, {ChangeEvent} from "react";
+import React, {ChangeEvent, FC} from "react";
 import {User} from "./User/User";
 import {DialogsType} from './DialogsContainer';
 
 
-export function Dialogs(props: DialogsType) {
+export const Dialogs: FC<DialogsType> = (props) => {
 
     const addedMessageStatet = () => {
         props.addedMessageStatet()

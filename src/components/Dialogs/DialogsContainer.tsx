@@ -4,9 +4,8 @@ import {
 import {connect} from "react-redux";
 import {Dialogs} from "./Dialogs";
 import {StateType} from "../../redux/reduser/reduxStore";
-import {Dispatch} from "redux";
-import {Redirect} from "react-router-dom";
-import React from "react";
+import {compose, Dispatch} from "redux";
+import React, {FC} from "react";
 import {HocRedirectLogin} from "../../hoc/RedirectLogin";
 
 
@@ -28,7 +27,7 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
 
     }
 }
- type MapStatePropsType = {
+type MapStatePropsType = {
     userName: Array<UserNameType>
     newMessageForState: string
     messageState: Array<MessageType>
@@ -38,10 +37,14 @@ type MapDispatchPropsType = {
     creatingMessageinTextarea: (textTexterea: string) => void
 }
 
-
 export type DialogsType = MapStatePropsType & MapDispatchPropsType
 
-const RedirectLogin = HocRedirectLogin(Dialogs)
+export default compose<FC>(
+    connect(mapStateToProps, mapDispatchToProps),
+    HocRedirectLogin
+)(Dialogs)
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(RedirectLogin)
+
+
+
