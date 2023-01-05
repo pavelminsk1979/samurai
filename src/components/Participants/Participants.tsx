@@ -6,16 +6,15 @@ import {ParticipanType} from "../../api/api";
 
 
 type ParticipantsType = {
-    isLogin:boolean
     totalCount: number
     count: number
     activePage: number
     participants: Array<ParticipanType>
-    showPaticipants: (activePage:number ,count:number) => void
+    showPaticipants: (activePage: number, count: number) => void
     disabled: Array<number>
     deleteFriend: (idPartisipant: number) => void
     setFriend: (idPartisipant: number) => void
-    getPaticipants:(activePage:number ,count:number)=>void
+    getPaticipants: (activePage: number, count: number) => void
 }
 
 export const Participants = (props: ParticipantsType) => {
@@ -28,12 +27,9 @@ export const Participants = (props: ParticipantsType) => {
     }
 
     const setActivePageHandler = (activePage: number) => {
-        props.showPaticipants(activePage,props.count)
+        props.showPaticipants(activePage, props.count)
     }
 
-    if(props.isLogin===false){
-        return <Redirect to={'/login'}/>
-    }
 
     return (
         <div>

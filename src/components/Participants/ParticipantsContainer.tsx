@@ -7,6 +7,8 @@ import {
 } from "../../redux/reduser/participantReduсer";
 import ParticipantsAxiosQueryComponents from "./ParticipantsAxiosQueryComponents";
 import { ParticipanType } from "../../api/api";
+import {HocRedirectLogin} from "../../hoc/RedirectLogin";
+
 
 
 const mapStateToPropse = (state: StateType): MapStatePropsType => {
@@ -17,7 +19,7 @@ const mapStateToPropse = (state: StateType): MapStatePropsType => {
         activePage: state.participantState.activePage,
         isLoading: state.participantState.isLoading,
         disabled:state.participantState.disabled,
-        isLogin:state.auth.isLogin
+
     }
 }
 
@@ -28,7 +30,7 @@ type MapStatePropsType = {
     activePage: number
     isLoading: boolean
     disabled: Array<number>
-    isLogin:boolean
+
 }
 type MapDispatchPropsType = {
     showPaticipants: (activePage:number ,count:number) => void
@@ -37,6 +39,8 @@ type MapDispatchPropsType = {
     setFriend:(idPartisipant: number)=>void
 }
 
+const RedirectLogin = HocRedirectLogin(ParticipantsAxiosQueryComponents)
+
 export type ParticipantsPropsType = MapStatePropsType & MapDispatchPropsType
 
 export default connect(mapStateToPropse, {
@@ -44,4 +48,4 @@ export default connect(mapStateToPropse, {
     deleteFriend,
     getPaticipants,
     showPaticipants,
-})(ParticipantsAxiosQueryComponents)
+})(RedirectLogin)

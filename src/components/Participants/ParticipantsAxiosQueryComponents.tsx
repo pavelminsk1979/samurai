@@ -4,7 +4,6 @@ import {Participants} from './Participants';
 import {Loading} from "../../common/components/Loading";
 
 
-
 class ParticipantsAxiosQueryComponents extends React.Component<ParticipantsPropsType> {
 
     componentDidMount() {
@@ -18,7 +17,6 @@ class ParticipantsAxiosQueryComponents extends React.Component<ParticipantsProps
             {this.props.isLoading && <Loading/>}
 
             <Participants
-                isLogin={this.props.isLogin}
                 getPaticipants={this.props.getPaticipants}
                 setFriend={this.props.setFriend}
                 deleteFriend={this.props.deleteFriend}
