@@ -13,7 +13,7 @@ let MapStatePropsRedirect = (state: StateType): MapStatePropsType => {
     }
 }
 
-export const HocRedirectLogin = <T extends {},>(Component: ComponentType<T>) => {
+export function HocRedirectLogin  <T>(Component: ComponentType<T>)  {
     const RedirectComponent = ({isLogin,...restProps}: MapStatePropsType) => {
 
         if (isLogin === false) return <Redirect to='/login'/>

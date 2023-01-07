@@ -2,6 +2,7 @@ import React from "react";
 import st from './ProfileInfo.module.css'
 import {Loading} from "../../../common/components/Loading";
 import {ProfilesType} from "../../../api/api";
+import {ProfileStatus} from "./ProfileStatus";
 
 type HeaderProfileType = {
     profileUser: ProfilesType
@@ -20,6 +21,7 @@ export function ProfileInfo(props: HeaderProfileType) {
             </div>
 
             <div>
+                <ProfileStatus status={'STATUS'}/>
                 <img src={props.profileUser.photos.large}  alt={'large ava'}/>
                 <div>
                     Hey!!!  {props.profileUser.aboutMe}
