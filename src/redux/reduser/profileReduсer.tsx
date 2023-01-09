@@ -1,4 +1,4 @@
-import {ContactsType, profilesAPI, ProfilesType} from "../../api/api"
+import { profilesAPI, ProfilesType, ProfileType} from "../../api/api"
 import {Dispatch} from "redux";
 
 
@@ -7,13 +7,21 @@ export type ProfilePostType = {
     text: string
 }
 
-const initState = {
+type InitStateType ={
+    posts:ProfilePostType[],
+    status: string
+    newPost: string
+    profileUser: ProfileType
+}
+
+const initState:InitStateType = {
     posts: [
         {id: 1, text: 'mmmm...'},
         {id: 2, text: 'What is it'},
         {id: 3, text: 'I  come home better'}
 
-    ] as Array<ProfilePostType>,
+    ] ,
+    status: '-----',
     newPost: '',
     profileUser: {
         aboutMe: '',
@@ -26,7 +34,7 @@ const initState = {
             youtube: '',
             github: '',
             mainLink: '',
-        } as ContactsType,
+        } ,
         fullName: '',
         lookingForAJob: false,
         lookingForAJobDescription: '',
@@ -35,10 +43,9 @@ const initState = {
             large: ''
         },
         userId: 1
-    } as ProfilesType
+    }
 }
 
-export type InitStateType = typeof initState
 
 export const profileReduсer = (state: InitStateType = initState, action: ActionType): InitStateType => {
 
@@ -58,14 +65,14 @@ export const profileReduсer = (state: InitStateType = initState, action: Action
             console.log('trigger')
             return {...state, profileUser: action.profileUser}
         }
+        case "SET-STATUS": {
+            return {...state, status: action.status}
+        }
+
         default:
             return state
     }
 }
-
-type ActionType = createTextInTextareaACType
-    | addedPostInStateACType
-    | setProfileUsersType
 
 
 type setProfileUsersType = ReturnType<typeof setProfileUsers>
@@ -92,6 +99,15 @@ export const createTextInTextareaAC = (symbolTaxtarea: string) => {
     } as const
 }
 
+type setStatusType = ReturnType<typeof setStatus>
+export const setStatus = (status: string) => {
+    return {
+        type: 'SET-STATUS',
+        status
+    } as const
+}
+
+
 /*thunk*/
 export const getProfiles = (userId: string) => (dispatch: Dispatch) => {
     profilesAPI.getProfiles(userId)
@@ -99,3 +115,25 @@ export const getProfiles = (userId: string) => (dispatch: Dispatch) => {
             dispatch(setProfileUsers(data))
         })
 }
+
+export const getStatus = (userId: string) => (dispatch: Dispatch) => {
+    profilesAPI.getStatus(userId)
+        .then((data) => {
+            dispatch(setStatus(data))
+        })
+}
+
+export const updateStatusMyProfile = (status: string) => (dispatch: Dispatch) => {
+    profilesAPI.updateStatus(status)
+        .then((data) => {
+            if (data.resultCode === 0) {
+                dispatch(setStatus(status))
+            }
+
+        })
+}
+
+type ActionType = createTextInTextareaACType
+    | addedPostInStateACType
+    | setProfileUsersType
+    | setStatusType

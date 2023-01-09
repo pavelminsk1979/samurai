@@ -7,7 +7,9 @@ import {ProfilesType} from "../../api/api";
 
 
 type PropsType = {
+    updateStatusMyProfile:(status: string) => void
     profileUser: ProfilesType
+    status:string
 }
 
 export function Profile(props: PropsType) {
@@ -15,7 +17,10 @@ export function Profile(props: PropsType) {
 
     return (
         <div>
-            <ProfileInfo profileUser={props.profileUser}/>
+            <ProfileInfo
+                updateStatusMyProfile={props.updateStatusMyProfile}
+                status={props.status}
+                profileUser={props.profileUser}/>
             <MyPostContainer/>
         </div>
     )

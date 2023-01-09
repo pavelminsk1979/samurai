@@ -6,6 +6,8 @@ import {ProfileStatus} from "./ProfileStatus";
 
 type HeaderProfileType = {
     profileUser: ProfilesType
+    status:string
+    updateStatusMyProfile:(status: string) => void
 }
 
 export function ProfileInfo(props: HeaderProfileType) {
@@ -21,7 +23,9 @@ export function ProfileInfo(props: HeaderProfileType) {
             </div>
 
             <div>
-                <ProfileStatus status={'STATUS'}/>
+                <ProfileStatus
+                    updateStatusMyProfile={props.updateStatusMyProfile}
+                    status={props.status}/>
                 <img src={props.profileUser.photos.large}  alt={'large ava'}/>
                 <div>
                     Hey!!!  {props.profileUser.aboutMe}

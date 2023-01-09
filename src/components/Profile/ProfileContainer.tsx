@@ -2,7 +2,7 @@ import React, {FC} from "react";
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
 import {StateType} from "../../redux/reduser/reduxStore";
-import {getProfiles} from "../../redux/reduser/profileReduсer";
+import {getProfiles, getStatus, updateStatusMyProfile} from "../../redux/reduser/profileReduсer";
 import { RouteComponentProps, withRouter} from "react-router-dom";
 import {ProfilesType} from "../../api/api";
 import {HocRedirectLogin} from "../../hoc/RedirectLogin";
@@ -22,12 +22,15 @@ class ProfileContainer extends React.Component<ResultProfilePropsType> {
             userId = '2'
         }
         this.props.getProfiles(userId)
+        this.props.getStatus(userId)
     }
 
     render() {
         return (
             <Profile
+                updateStatusMyProfile={this.props.updateStatusMyProfile}
                 profileUser={this.props.profileUser}
+                status={this.props.status}
             />
         )
     }
@@ -37,6 +40,7 @@ class ProfileContainer extends React.Component<ResultProfilePropsType> {
 let MapStateProps = (state: StateType): MapStatePropsType => {
     return {
         profileUser: state.profileState.profileUser,
+        status:state.profileState.status
 
     }
 }
@@ -44,17 +48,20 @@ let MapStateProps = (state: StateType): MapStatePropsType => {
 
 type MapDispatchPropsType = {
     getProfiles: (userId: string) => void
+    getStatus: (userId: string) => void
+    updateStatusMyProfile:(status: string) => void
 }
 
 type MapStatePropsType = {
     profileUser: ProfilesType
+    status:string
 }
 
 export type ProfilePropsType = MapStatePropsType & MapDispatchPropsType
 
 
 export default compose<FC>(
-    connect(MapStateProps, {getProfiles}),
+    connect(MapStateProps, {getProfiles,getStatus,updateStatusMyProfile}),
     withRouter,
     HocRedirectLogin)(ProfileContainer)
 
