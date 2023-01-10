@@ -4,12 +4,14 @@ import {dialogReduсer} from "./dialogReduсer";
 import {participantReduсer} from "./participantReduсer";
 import {authReduсer} from "./authReduсer";
 import thunk from "redux-thunk";
+import {reducer as formReducer} from 'redux-form'
 
 const commonReducer = combineReducers({
     profileState: profileReduсer,
     dialogState: dialogReduсer,
     participantState: participantReduсer,
-    auth: authReduсer
+    auth: authReduсer,
+    form:formReducer
 })
 
 export const store = createStore(commonReducer,applyMiddleware(thunk))
