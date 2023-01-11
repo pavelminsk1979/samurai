@@ -1,20 +1,16 @@
 import st from './Dialogs.module.css'
 import {MessageUser} from "./MessageUser/MessageUser";
-import React, {ChangeEvent, FC} from "react";
+import React, {FC} from "react";
 import {User} from "./User/User";
 import {DialogsType} from './DialogsContainer';
+import {MessageReduxForm} from "./MessageForm";
 
 
 export const Dialogs: FC<DialogsType> = (props) => {
 
-    const addedMessageStatet = () => {
-        props.addedMessageStatet()
-        props.creatingMessageinTextarea('')
-    }
 
-    const creatingMessageInTextarea = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        const textTexterea = event.currentTarget.value
-        props.creatingMessageinTextarea(textTexterea)
+    const onSubmitHandler = (value: any) => {
+        props.addedMessageStatet(value.newMessageFromForm)
     }
 
 
@@ -34,14 +30,9 @@ export const Dialogs: FC<DialogsType> = (props) => {
             </div>
 
             <div className={st.messagesAll}>
-                <div>
-                    <div><textarea
-                        onChange={creatingMessageInTextarea}
-                        value={props.newMessageForState}></textarea></div>
-                    <div>
-                        <button onClick={addedMessageStatet}>added</button>
-                    </div>
-                </div>
+
+                <MessageReduxForm
+                    onSubmit={onSubmitHandler}/>
 
                 {props.messageState.map(el => {
                         return (

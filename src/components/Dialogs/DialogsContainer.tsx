@@ -1,5 +1,6 @@
+
 import {
-    addedMessageStatetAC, creatingMessageinTextareaAC, MessageType, UserNameType
+    addedMessageStatetAC, MessageType, UserNameType
 } from "../../redux/reduser/dialogReduсer";
 import {connect} from "react-redux";
 import {Dialogs} from "./Dialogs";
@@ -12,29 +13,22 @@ import {HocRedirectLogin} from "../../hoc/RedirectLogin";
 const mapStateToProps = (state: StateType): MapStatePropsType => {
     return {
         userName: state.dialogState.userName,
-        newMessageForState: state.dialogState.newMessageForState,
         messageState: state.dialogState.messageState
     }
 }
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
     return {
-        addedMessageStatet: () => {
-            dispatch(addedMessageStatetAC())
-        },
-        creatingMessageinTextarea: (textTexterea: string) => {
-            dispatch(creatingMessageinTextareaAC(textTexterea))
+        addedMessageStatet: (newMessage:string) => {
+            dispatch(addedMessageStatetAC(newMessage))
         }
-
     }
 }
 type MapStatePropsType = {
     userName: Array<UserNameType>
-    newMessageForState: string
     messageState: Array<MessageType>
 }
 type MapDispatchPropsType = {
-    addedMessageStatet: () => void
-    creatingMessageinTextarea: (textTexterea: string) => void
+    addedMessageStatet: (newMessage:string) => void
 }
 
 export type DialogsType = MapStatePropsType & MapDispatchPropsType

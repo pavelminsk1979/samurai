@@ -1,4 +1,4 @@
-import { profilesAPI, ProfilesType, ProfileType} from "../../api/api"
+import {profilesAPI, ProfilesType, ProfileType} from "../../api/api"
 import {Dispatch} from "redux";
 
 
@@ -7,20 +7,20 @@ export type ProfilePostType = {
     text: string
 }
 
-type InitStateType ={
-    posts:ProfilePostType[],
+type InitStateType = {
+    posts: ProfilePostType[],
     status: string
     newPost: string
     profileUser: ProfileType
 }
 
-const initState:InitStateType = {
+const initState: InitStateType = {
     posts: [
         {id: 1, text: 'mmmm...'},
         {id: 2, text: 'What is it'},
         {id: 3, text: 'I  come home better'}
 
-    ] ,
+    ],
     status: '-----',
     newPost: '',
     profileUser: {
@@ -34,7 +34,7 @@ const initState:InitStateType = {
             youtube: '',
             github: '',
             mainLink: '',
-        } ,
+        },
         fullName: '',
         lookingForAJob: false,
         lookingForAJobDescription: '',
@@ -42,7 +42,7 @@ const initState:InitStateType = {
             small: '',
             large: ''
         },
-        userId: 1
+        userId: 26160
     }
 }
 
@@ -53,13 +53,9 @@ export const profileReduсer = (state: InitStateType = initState, action: Action
         case 'ADDED-POST-STATE': {
             return {
                 ...state, posts: [{
-                    id: 4, text: state.newPost
+                    id: 4, text: action.newPost
                 }, ...state.posts]
             }
-        }
-        case 'CREATING-POST-IN-TEXTAREA': {
-
-            return {...state, newPost: action.symbolTaxtarea};
         }
         case "SET-PROFILE-USER": {
             console.log('trigger')
@@ -84,20 +80,13 @@ export const setProfileUsers = (profileUser: ProfilesType) => {
 }
 
 type addedPostInStateACType = ReturnType<typeof addedPostInStateAC>
-export const addedPostInStateAC = () => {
+export const addedPostInStateAC = (newPost: string) => {
     return {
-        type: 'ADDED-POST-STATE'
+        type: 'ADDED-POST-STATE',
+        newPost
     } as const
 }
 
-
-type createTextInTextareaACType = ReturnType<typeof createTextInTextareaAC>
-export const createTextInTextareaAC = (symbolTaxtarea: string) => {
-    return {
-        type: 'CREATING-POST-IN-TEXTAREA',
-        symbolTaxtarea
-    } as const
-}
 
 type setStatusType = ReturnType<typeof setStatus>
 export const setStatus = (status: string) => {
@@ -133,7 +122,7 @@ export const updateStatusMyProfile = (status: string) => (dispatch: Dispatch) =>
         })
 }
 
-type ActionType = createTextInTextareaACType
+type ActionType = /*createTextInTextareaACType*/
     | addedPostInStateACType
     | setProfileUsersType
     | setStatusType

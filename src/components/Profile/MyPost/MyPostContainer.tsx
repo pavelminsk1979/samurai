@@ -1,5 +1,5 @@
 import {MyPost} from "./MyPost";
-import {addedPostInStateAC, createTextInTextareaAC, ProfilePostType} from "../../../redux/reduser/profileReduсer";
+import {addedPostInStateAC,  ProfilePostType} from "../../../redux/reduser/profileReduсer";
 import {connect} from "react-redux";
 import {StateType} from "../../../redux/reduser/reduxStore";
 import {Dispatch} from "redux";
@@ -7,28 +7,26 @@ import {Dispatch} from "redux";
 
 
 const mapStateToProps= (state:StateType):MapStatePropsType => {
+
     return{
         posts:state.profileState.posts,
-        newPost:state.profileState.newPost,
     }
 }
+
 const mapDispatchToProps = (dispatch:Dispatch):MapDispatchPropsType => {
+
     return{
-        createTextInTextarea:(symbol:string)=>{
-            dispatch(createTextInTextareaAC(symbol))
-        },
-        addedPostInState:()=>{
-            dispatch(addedPostInStateAC())
+        addedPostInState:(newPost:string)=>{
+            dispatch(addedPostInStateAC(newPost))
         }
     }
 }
+
 type MapStatePropsType = {
     posts: Array<ProfilePostType>
-    newPost: string
 }
 type MapDispatchPropsType = {
-    createTextInTextarea:(symbol:string)=>void
-    addedPostInState:()=>void
+    addedPostInState:(newPost:string)=>void
 }
 export type MyPostType = MapStatePropsType & MapDispatchPropsType
 

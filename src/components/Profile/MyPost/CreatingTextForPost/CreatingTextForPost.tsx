@@ -1,22 +1,16 @@
-import React, {ChangeEvent} from "react";
+import React from "react";
 import st from './CreatingTextForPost.module.css'
+import {PostReduxForm} from "./PostForm";
 
 export type CreatingTextForPostType = {
-    createTextInTextarea: (symbol: string) => void
-    addedPostInState: () => void
-    newPost: string
+    addedPostInState: (newPost: string) => void
 }
 
 export function CreatingTextForPost(props: CreatingTextForPostType) {
 
-    const createTextInTextarea = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        const symbol = event.currentTarget.value
-        props.createTextInTextarea(symbol)
-    }
 
-    const addedPostInState = () => {
-        props.addedPostInState()
-        props.createTextInTextarea('')
+    const onSubmitHandler = (value: any) => {
+        props.addedPostInState(value.newPostFromForm)
     }
 
     return (
@@ -24,18 +18,9 @@ export function CreatingTextForPost(props: CreatingTextForPostType) {
             <div className={st.title}>
                 My post
             </div>
-            <div>
-                <textarea
-                    value={props.newPost}
-                    onChange={createTextInTextarea}/>
-                <div>
-                    <button
-                        onClick={addedPostInState}
-                        className={st.button}>added post
-                    </button>
-                </div>
 
-            </div>
+            <PostReduxForm
+                onSubmit={onSubmitHandler}/>
 
         </div>
     )

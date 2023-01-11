@@ -4,18 +4,14 @@ import {CreatingTextForPost} from "./CreatingTextForPost/CreatingTextForPost";
 import {MyPostType} from "./MyPostContainer";
 
 
-
-export const MyPost=(props: MyPostType)=> {
+export const MyPost = (props: MyPostType) => {
 
     return (
         <div>
+
             <CreatingTextForPost
-                newPost={props.newPost}
-                createTextInTextarea={props.createTextInTextarea}
-                addedPostInState={props.addedPostInState}
+                addedPostInState={props.addedPostInState}/>
 
-
-            />
             <div>
                 <div>
                     {
@@ -29,8 +25,6 @@ export const MyPost=(props: MyPostType)=> {
                         })
                     }
                 </div>
-
-
             </div>
         </div>
     )
