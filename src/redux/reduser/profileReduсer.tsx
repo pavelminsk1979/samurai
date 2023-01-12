@@ -122,7 +122,6 @@ export const updateStatusMyProfile = (status: string) => (dispatch: Dispatch) =>
         })
 }
 
-type ActionType = /*createTextInTextareaACType*/
-    | addedPostInStateACType
+type ActionType = addedPostInStateACType
     | setProfileUsersType
     | setStatusType

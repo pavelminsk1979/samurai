@@ -2,9 +2,8 @@ import {authAPI, DataAuthMeType} from "../../api/api";
 import {Dispatch} from "redux";
 
 
-
 const initialState = {
-    id:1,
+    id: 1,
     login: '',
     email: '',
     isLogin: false
@@ -37,7 +36,6 @@ export const setDataLoginWithServer = (dataLoginWithServer: DataAuthMeType) => {
 export const getAuthMe = () => (dispatch: Dispatch) => {
     authAPI.getAuthMe()
         .then((data) => {
-            console.log(data, "RESPONSE")
             if (data.resultCode === 0) {
                 dispatch(setDataLoginWithServer(data.data))
             }
