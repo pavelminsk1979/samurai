@@ -1,7 +1,6 @@
 import React from "react";
 import st from "./FormsErrorTextarea.module.css";
 
-
 export const Textarea = ({input, meta, ...props}: any) => {
     const Error = meta.error && meta.touched
     return (

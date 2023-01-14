@@ -1,6 +1,6 @@
 
 import {connect} from "react-redux";
-import {getAuthMe} from "../../redux/reduser/authReduсer";
+import {getAuthMe, logout} from "../../redux/reduser/authReduсer";
 import {StateType} from "../../redux/reduser/reduxStore";
 import HeaderAxiosQueryComponent from "./HeaderAxiosQueryComponent";
 
@@ -23,8 +23,9 @@ export type mapStateToPropseType = {
 }
 type MapDispatchToPropsType = {
     getAuthMe:()=>void
-   /* setDataLoginWithServer: (dataLoginWithServer: DataAuthMeType) => void*/
+    logout:()=>void
 }
+
 export type HeaderType = mapStateToPropseType & MapDispatchToPropsType
 
-export default connect(mapStateToPropse, {getAuthMe})(HeaderAxiosQueryComponent)
+export default connect(mapStateToPropse, {getAuthMe,logout})(HeaderAxiosQueryComponent)

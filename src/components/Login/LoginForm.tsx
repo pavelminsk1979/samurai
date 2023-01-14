@@ -8,16 +8,17 @@ export const LoginForm = (props:any) => {
       <form onSubmit={props.handleSubmit}>
           <div><Field
               validate={[requiredField]}
-              name={'login'}
-              placeholder={'login'}
+              name={'email'}
+              placeholder={'email'}
               component={Input}/></div>
           <div><Field
               validate={[requiredField]}
+              type={'password'}
               name={'password'}
               placeholder={'password'}
               component={Input}/></div>
           <div><Field
-              name={'Remember me'}
+              name={'rememberMe'}
               type={'checkbox'}
               component={Input}/>Remember me</div>
           <div><button>Login</button></div>
@@ -26,5 +27,5 @@ export const LoginForm = (props:any) => {
 }
 
 export const LoginReduxForm = reduxForm({
-form:'login'
+form:'loginForm'
 }) (LoginForm)

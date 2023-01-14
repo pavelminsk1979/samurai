@@ -9,11 +9,13 @@ class HeaderAxiosQueryComponent extends React.Component<HeaderType> {
     }
 
     render() {
-        return <Header {...this.props}
-                       isLogin={this.props.isLogin}
-                       id={this.props.id}
-                       login={this.props.login}
-                       email={this.props.email}/>
+        return <Header
+            getAuthMe={this.props.getAuthMe}
+            logout={this.props.logout}
+            isLogin={this.props.isLogin}
+            id={this.props.id}
+            login={this.props.login}
+            email={this.props.email}/>
     }
 }
 

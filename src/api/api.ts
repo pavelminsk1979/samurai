@@ -27,6 +27,20 @@ export const authAPI = {
             .then(response => {
                 return response.data
             })
+    },
+
+    login(email:string,password:string,rememberMe:boolean=false) {
+        return instance.post <CommonType>(`/auth/login`,{email,password,rememberMe})
+            .then(response => {
+                return response.data
+            })
+    },
+
+    logout() {
+        return instance.delete <CommonType>(`/auth/login`)
+            .then(response => {
+                return response.data
+            })
     }
 }
 
@@ -44,7 +58,7 @@ export const profilesAPI = {
             })
     },
     updateStatus(status: string) {
-        return instance.put<UpdateStatusType>('profile/status', {status: status})
+        return instance.put<CommonType>('profile/status', {status: status})
             .then(response => {
                 return response.data
             })
@@ -67,7 +81,7 @@ export const followAPI = {
     }
 }
 
-type UpdateStatusType = {
+type CommonType = {
     resultCode: number
     messages: Array<string>,
     data: {}

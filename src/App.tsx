@@ -8,8 +8,8 @@ import {Settings} from "./components/Settings/Settings";
 import ParticipantsContainer from "./components/Participants/ParticipantsContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from './components/Header/HeaderContainer';
-import {Login} from "./components/Login/Login";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import LoginContainer from "./components/Login/LoginContainer";
 
 
 
@@ -31,7 +31,7 @@ const App = () => {
                 <Route
                     path='/participants'
                     render={() => <ParticipantsContainer/>}/>
-                <Route path='/login' component={Login}/>
+                <Route path='/login' component={LoginContainer}/>
             </div>
         </div>
 

@@ -5,17 +5,20 @@ import {HeaderType} from "./HeaderContainer";
 
 
 export function Header(props: HeaderType) {
+    const logoutHundler = () => {
+      props.logout()
+    }
     return (
         <header className={st.header}>
             <img
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5HJJq3RSb9DNHVQz7RPOeTA8mAmEYKQosPw&usqp=CAU"/>
             <div className={st.loginBlok}>
                 {props.isLogin
-                    ? props.login
-                    : <NavLink to={'/login'}>LOGIN</NavLink>}
+                    ? <button onClick={logoutHundler}>Log out</button>
+                    : <NavLink to={'/login'}>Hey! ne grusti-SNIKERSNI!</NavLink>}
             </div>
             <span>{props.id}</span>
-            <span>{props.email}</span>
+            <span>{props.login}</span>
         </header>
     )
 }
