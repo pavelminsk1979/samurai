@@ -10,19 +10,25 @@ import { ParticipanType } from "../../api/api";
 import {HocRedirectLogin} from "../../hoc/RedirectLogin";
 import {compose} from "redux";
 import {FC} from "react";
+import {
+    selectorActivePage,
+    selectorCount, selectorDisabled, selectorIsLoading,
+    selectorParticipants,
+    selectorTotalCount
+} from "../../selectors/participantSelectors";
 
 
 
 const mapStateToPropse = (state: StateType): MapStatePropsType => {
     return {
-        participants: state.participantState.participants,
-        count: state.participantState.count,
-        totalCount: state.participantState.totalCount,
-        activePage: state.participantState.activePage,
-        isLoading: state.participantState.isLoading,
-        disabled:state.participantState.disabled,
-
+        participants: selectorParticipants(state),
+        count: selectorCount(state),
+        totalCount: selectorTotalCount(state),
+        activePage: selectorActivePage(state),
+        isLoading:selectorIsLoading(state),
+        disabled:selectorDisabled(state),
     }
+
 }
 
 type MapStatePropsType = {

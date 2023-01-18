@@ -1,66 +1,43 @@
-import React, {ChangeEvent} from "react";
+import React, {ChangeEvent, useState} from "react";
 
 type ProfileStatusType = {
     status: string
     updateStatusMyProfile: (status: string) => void
 }
 
-export class ProfileStatus extends React.Component <ProfileStatusType> {
+export const ProfileStatus = (props:ProfileStatusType) => {
+    const [editStatus,setEditStatus] = useState(props.status)
+    const [toggle, setToggle] = useState(false)
 
-    state = {
-        editMode: false,
-        status: this.props.status
+    const onChangeHandler = (event:ChangeEvent<HTMLInputElement>) => {
+      setEditStatus(event.currentTarget.value)
     }
 
-    activateEdidMode = () => {
-        this.setState({
-            editMode: true
-        })
+    const activateEdidMode = () => {
+        setToggle(true)
     }
 
-    deActivateEdidMode = () => {
-        this.setState({
-            editMode: false
-        })
-        this.props.updateStatusMyProfile(this.state.status)
-    }
-    onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        this.setState({
-            status: event.currentTarget.value
-        })
-
+    const deActivateEdidMode = () => {
+        props.updateStatusMyProfile(editStatus)
+        setToggle(false)
     }
 
-    componentDidUpdate (prevProps:any,prevState:any) {
-        if(prevProps.status !== this.props.status){
-            this.setState({
-                status:this.props.status
-            })
-        }
-    }
 
-    render() {
-        return (
-            <div>
-                {!this.state.editMode &&
-                    <div>
-                        <span
-                            onDoubleClick={this.activateEdidMode}>
-                            {this.props.status || 'No status'}</span>
-                    </div>
-                }
-                {this.state.editMode &&
-                    <div>
-                        <input
-                            onChange={this.onChangeHandler}
-                            autoFocus
-                            onBlur={this.deActivateEdidMode.bind(this)}
-                            value={this.state.status}/>
-                    </div>
-                }
-            </div>
-        )
-    }
+    return (
+        <div>
+            {toggle
+            ? <input
+            onChange={onChangeHandler}
+            autoFocus
+            onBlur={deActivateEdidMode}
+            value={editStatus}/>
+            : <span
+            onDoubleClick={activateEdidMode}>
+                            {props.status || 'No status'}
+               </span>}
+        </div>
+    )
 }
+
 
 
