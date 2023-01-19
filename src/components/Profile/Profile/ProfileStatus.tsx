@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from "react";
+import React, {ChangeEvent, useEffect, useState} from "react";
 
 type ProfileStatusType = {
     status: string
@@ -8,6 +8,10 @@ type ProfileStatusType = {
 export const ProfileStatus = (props:ProfileStatusType) => {
     const [editStatus,setEditStatus] = useState(props.status)
     const [toggle, setToggle] = useState(false)
+
+    useEffect(() => {
+        setEditStatus(props.status)
+    },[props.status])
 
     const onChangeHandler = (event:ChangeEvent<HTMLInputElement>) => {
       setEditStatus(event.currentTarget.value)

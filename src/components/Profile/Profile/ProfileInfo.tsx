@@ -28,10 +28,10 @@ export function ProfileInfo(props: HeaderProfileType) {
                     status={props.status}/>
                 <img src={props.profileUser.photos.large}  alt={'large ava'}/>
                 <div>
-                    Hey!!!  {props.profileUser.aboutMe}
+                    Учуь програмировать, и будет навено норм если научусь
                 </div>
-                <span> My name {props.profileUser.fullName}.</span>
-                <span> I work {props.profileUser.lookingForAJobDescription}</span>
+                <span> My e-mail {props.profileUser.fullName}@mail.ru</span>
+                <span>  </span>
                 <div>
                     <img src={props.profileUser.photos.small} alt={'small ava'}/>
                 </div>
