@@ -58,7 +58,6 @@ export const profileReduсer = (state: InitStateType = initState, action: Action
             }
         }
         case "SET-PROFILE-USER": {
-            console.log('trigger')
             return {...state, profileUser: action.profileUser}
         }
         case "SET-STATUS": {

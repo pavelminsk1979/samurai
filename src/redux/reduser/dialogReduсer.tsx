@@ -35,7 +35,8 @@ export type initialMessageStateType={
 export const dialogReduсer= (state:initialMessageStateType=initialMessageState, action:ActionType):initialMessageStateType=>{
     switch (action.type) {
         case 'ADDED-MESSAGE': {
-            return {...state,messageState:[{id:6,message:action.newMessage},...state.messageState]}
+            return {...state,messageState:[{
+                id:6,message:action.newMessage},...state.messageState]}
         }
 
         default:return state
