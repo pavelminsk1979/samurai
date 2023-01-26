@@ -1,7 +1,5 @@
-import {addedMessageStatetAC, dialogReduсer, initialMessageStateType} from "../redux/reduser/dialogReduсer";
 import {
     changeIsLoading,
-    followParticipant,
     initialParticipantsStateType,
     participantReduсer
 } from "../redux/reduser/participantReduсer";

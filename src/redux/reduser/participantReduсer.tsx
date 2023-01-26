@@ -4,7 +4,7 @@ import {Dispatch} from "redux";
 
 const initialParticipantsState: initialParticipantsStateType = {
     participants: [],
-    count: 100,
+    count: 20,
     totalCount: 0,
     activePage: 1,
     isLoading: false,
