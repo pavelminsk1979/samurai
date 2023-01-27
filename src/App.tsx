@@ -8,9 +8,13 @@ import {Settings} from "./components/Settings/Settings";
 import ParticipantsContainer from "./components/Participants/ParticipantsContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from './components/Header/HeaderContainer';
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
+/*import DialogsContainer from "./components/Dialogs/DialogsContainer";*/
 import LoginContainer from "./components/Login/LoginContainer";
+import {Loading} from "./common/components/Loading";
 
+
+const DialogsContainer =React.lazy(() => import(
+    './components/Dialogs/DialogsContainer'))
 
 
 const App = () => {
@@ -21,7 +25,11 @@ const App = () => {
             <div className={st.content}>
                 <Route
                     path='/dialogs'
-                    render={() => <DialogsContainer/>}/>
+                    render={() =>{
+                        return <React.Suspense fallback={<div><Loading/></div>}>
+                        <DialogsContainer/>
+                        </React.Suspense>
+                    }}/>
                 <Route
                     path='/profile/:userId?'
                     render={() => <ProfileContainer/>}/>
