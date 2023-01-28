@@ -1,7 +1,7 @@
 import React from 'react';
 import st from './App.module.css'
 import {NavBar} from "./components/NavBar/NavBar";
-import {Route} from "react-router-dom";
+import {Redirect, Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
@@ -20,6 +20,7 @@ const DialogsContainer =React.lazy(() => import(
 const App = () => {
     return (
         <div className={st.app}>
+            <Redirect from = 'LoginContainer' to = ''/>
             <HeaderContainer/>
             <NavBar/>
             <div className={st.content}>
