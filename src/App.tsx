@@ -20,7 +20,6 @@ const DialogsContainer =React.lazy(() => import(
 const App = () => {
     return (
         <div className={st.app}>
-            <Redirect from = 'LoginContainer' to = ''/>
             <HeaderContainer/>
             <NavBar/>
             <div className={st.content}>
