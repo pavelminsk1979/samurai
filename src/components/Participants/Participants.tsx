@@ -1,7 +1,7 @@
 import React from 'react';
 import userFoto from '../../assets/images/blackMan.jpg'
 import st from './Participant.module.css'
-import {NavLink, Redirect} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import {ParticipanType} from "../../api/api";
 import {Paginator} from "./Paginator";
 

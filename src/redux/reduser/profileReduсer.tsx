@@ -63,6 +63,10 @@ export const profileReduсer = (state: InitStateType = initState, action: Action
         case "SET-STATUS": {
             return {...state, status: action.status}
         }
+        case "UPDATE-MY-FOTO":{
+            return {...state, profileUser: {
+                ...state.profileUser,photos : action.photos}}
+        }
 
         default:
             return state
@@ -95,8 +99,27 @@ export const setStatus = (status: string) => {
     } as const
 }
 
+type updateMyFotoType = ReturnType<typeof updateMyFoto>
+export const updateMyFoto = (photos:any) => {
+    return {
+        type: 'UPDATE-MY-FOTO',
+        photos
+    } as const
+}
+
 
 /*thunk*/
+export const chosedFoto = (myFoto: string) => (dispatch: Dispatch) => {
+    profilesAPI.updateMyFoto(myFoto)
+        .then((response) => {
+            if(response.data.resultCode===0){
+                dispatch(updateMyFoto(response.data.data))
+            }
+
+        })
+}
+
+
 export const getProfiles = (userId: string) => (dispatch: Dispatch) => {
     profilesAPI.getProfiles(userId)
         .then((data) => {
@@ -124,3 +147,4 @@ export const updateStatusMyProfile = (status: string) => (dispatch: Dispatch) =>
 type ActionType = addedPostInStateACType
     | setProfileUsersType
     | setStatusType
+    | updateMyFotoType

@@ -62,6 +62,16 @@ export const profilesAPI = {
             .then(response => {
                 return response.data
             })
+    },
+    updateMyFoto(myFoto:string) {
+        const formData = new FormData()
+        formData.append('image',myFoto)
+        return instance.put<ProfilePhotoType>('profile/photo', formData,{
+            headers:{'Content-Type':'multipart/form-data'}
+        })
+            .then(response => {
+                return response
+            })
     }
 }
 
@@ -78,6 +88,15 @@ export const followAPI = {
             .then(response => {
                 return response.data
             })
+    }
+}
+
+type ProfilePhotoType = {
+    resultCode: number
+    messages: Array<string>,
+    data: {
+        small: string
+        large:string
     }
 }
 

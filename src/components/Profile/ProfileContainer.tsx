@@ -2,7 +2,7 @@ import React, {FC} from "react";
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
 import {StateType} from "../../redux/reduser/reduxStore";
-import {getProfiles, getStatus, updateStatusMyProfile} from "../../redux/reduser/profileReduсer";
+import {chosedFoto, getProfiles, getStatus, updateStatusMyProfile} from "../../redux/reduser/profileReduсer";
 import { RouteComponentProps, withRouter} from "react-router-dom";
 import {ProfilesType} from "../../api/api";
 import {HocRedirectLogin} from "../../hoc/RedirectLogin";
@@ -17,6 +17,10 @@ type ResultProfilePropsType = RouteComponentProps<PathParamsType> & ProfileProps
 
 class ProfileContainer extends React.Component<ResultProfilePropsType> {
     componentDidMount() {
+       /* если по пользователю кликну то будет
+        айдишка его,  если не кликну то будет
+        underfined- и тогда свой профиль
+        отображу по моей айдишке '26160'*/
         let userId = this.props.match.params.userId
         if (!userId) {
             userId = '26160'
@@ -25,9 +29,12 @@ class ProfileContainer extends React.Component<ResultProfilePropsType> {
         this.props.getStatus(userId)
     }
 
+
     render() {
         return (
             <Profile
+                chosedFoto={this.props.chosedFoto}
+                isDirector={!this.props.match.params.userId}
                 updateStatusMyProfile={this.props.updateStatusMyProfile}
                 profileUser={this.props.profileUser}
                 status={this.props.status}
@@ -50,6 +57,7 @@ type MapDispatchPropsType = {
     getProfiles: (userId: string) => void
     getStatus: (userId: string) => void
     updateStatusMyProfile:(status: string) => void
+    chosedFoto:(myFoto:string)=>void
 }
 
 type MapStatePropsType = {
@@ -61,7 +69,7 @@ export type ProfilePropsType = MapStatePropsType & MapDispatchPropsType
 
 
 export default compose<FC>(
-    connect(MapStateProps, {getProfiles,getStatus,updateStatusMyProfile}),
+    connect(MapStateProps, {getProfiles,getStatus,updateStatusMyProfile,chosedFoto}),
     withRouter,
     HocRedirectLogin)(ProfileContainer)
 

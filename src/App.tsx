@@ -8,7 +8,6 @@ import {Settings} from "./components/Settings/Settings";
 import ParticipantsContainer from "./components/Participants/ParticipantsContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from './components/Header/HeaderContainer';
-/*import DialogsContainer from "./components/Dialogs/DialogsContainer";*/
 import LoginContainer from "./components/Login/LoginContainer";
 import {Loading} from "./common/components/Loading";
 
