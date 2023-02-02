@@ -26,14 +26,14 @@ const initState: InitStateType = {
     profileUser: {
         aboutMe: '',
         contacts: {
-            facebook: '',
-            website: '',
-            vk: '',
-            twitter: '',
-            instagram: '',
-            youtube: '',
-            github: '',
-            mainLink: '',
+            facebook: '1',
+            website: '2',
+            vk: '3',
+            twitter: '4',
+            instagram: '5',
+            youtube: '6',
+            github: '7',
+            mainLink: '8',
         },
         fullName: '',
         lookingForAJob: false,
@@ -64,8 +64,9 @@ export const profileReduсer = (state: InitStateType = initState, action: Action
             return {...state, status: action.status}
         }
         case "UPDATE-MY-FOTO":{
-            return {...state, profileUser: {
-                ...state.profileUser,photos : action.photos}}
+            return {...state,
+                profileUser: {...state.profileUser,
+                    photos : {...action.photos.photos}}}
         }
 
         default:
@@ -109,7 +110,8 @@ export const updateMyFoto = (photos:any) => {
 
 
 /*thunk*/
-export const chosedFoto = (myFoto: string) => (dispatch: Dispatch) => {
+export const chosedFoto = (myFoto: File) => (dispatch: Dispatch) => {
+    console.log('alalala')
     profilesAPI.updateMyFoto(myFoto)
         .then((response) => {
             if(response.data.resultCode===0){

@@ -63,7 +63,7 @@ export const profilesAPI = {
                 return response.data
             })
     },
-    updateMyFoto(myFoto:string) {
+    updateMyFoto(myFoto:File) {
         const formData = new FormData()
         formData.append('image',myFoto)
         return instance.put<ProfilePhotoType>('profile/photo', formData,{
@@ -125,15 +125,19 @@ export type ProfilesType = {
     }
     userId: number
 }
+
+export type ContactsKeyType = 'facebook' | 'website' | 'vk' | 'twitter' | 'instagram' | 'youtube' | 'github' | 'mainLink'
+
 export type ContactsType = {
-    facebook: string
-    website: string
-    vk: string
-    twitter: string
-    instagram: string
-    youtube: string
-    github: string
-    mainLink: string
+    [key in ContactsKeyType]: string | null
+   /* facebook: string|null
+    website: string|null
+    vk: string|null
+    twitter: string|null
+    instagram: string|null
+    youtube: string|null
+    github: string|null
+    mainLink: string|null*/
 }
 
 

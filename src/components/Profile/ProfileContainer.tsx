@@ -16,11 +16,12 @@ type PathParamsType = {
 type ResultProfilePropsType = RouteComponentProps<PathParamsType> & ProfilePropsType
 
 class ProfileContainer extends React.Component<ResultProfilePropsType> {
-    componentDidMount() {
-       /* если по пользователю кликну то будет
-        айдишка его,  если не кликну то будет
-        underfined- и тогда свой профиль
-        отображу по моей айдишке '26160'*/
+
+     refreshProfile () {
+        /* если по пользователю кликну то будет
+      айдишка его,  если не кликну то будет
+      underfined- и тогда свой профиль
+      отображу по моей айдишке '26160'*/
         let userId = this.props.match.params.userId
         if (!userId) {
             userId = '26160'
@@ -28,6 +29,16 @@ class ProfileContainer extends React.Component<ResultProfilePropsType> {
         this.props.getProfiles(userId)
         this.props.getStatus(userId)
     }
+
+    componentDidMount() {
+         this.refreshProfile()
+    }
+
+    componentDidUpdate(prevProps: Readonly<ResultProfilePropsType>, prevState: Readonly<{}>, snapshot?: any) {
+         if(this.props.match.params.userId !== prevProps.match.params.userId){
+             this.refreshProfile()
+         }
+     }
 
 
     render() {

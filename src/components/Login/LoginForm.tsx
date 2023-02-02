@@ -3,21 +3,26 @@ import {Field, reduxForm} from "redux-form";
 import {Input} from "../../common/FormsErrorStule/FormsErrorTextarea";
 import {requiredField} from "../../utils/validators/validators";
 
-export const LoginForm = (props:any) => {
+ const LoginForm = (props:any) => {
   return(
       <form onSubmit={props.handleSubmit}>
-          <div><Field
+          <div>
+              <Field
               validate={[requiredField]}
               name={'email'}
               placeholder={'email'}
-              component={Input}/></div>
-          <div><Field
+              component={Input}/>
+          </div>
+          <div>
+              <Field
               validate={[requiredField]}
               type={'password'}
               name={'password'}
               placeholder={'password'}
-              component={Input}/></div>
-          <div><Field
+              component={Input}/>
+          </div>
+          <div
+          ><Field
               name={'rememberMe'}
               type={'checkbox'}
               component={Input}/>Remember me</div>
