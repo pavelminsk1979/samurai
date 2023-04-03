@@ -15,10 +15,11 @@ export function Header(props: HeaderType) {
             <div className={st.loginBlok}>
                 {props.isLogin
                     ? <button onClick={logoutHundler}>Log out</button>
-                    : <NavLink to={'/login'}>Hey! ne grusti-SNIKERSNI!</NavLink>}
+                    : <NavLink to={'/login'}>LOG IN </NavLink>}
             </div>
-            <span>{props.id}</span>
-            <span>{props.login}</span>
+
+            <span>{'  '+props.id+' ... '}</span>
+            <span className={st.login}>pavelminsk1979@mail.ru/1979@pav</span>
         </header>
     )
 }

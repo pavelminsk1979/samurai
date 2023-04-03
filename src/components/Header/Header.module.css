@@ -10,3 +10,7 @@
 .loginBlok{
 float: right;
 }
+.login{
+    padding: 10px;
+    font-size: 25px;
+}
